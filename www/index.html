@@ -19,7 +19,7 @@
     specific language governing permissions and limitations
     under the License.
 -->
-<html>
+ <html lang="en" ng-app="e2g" class="no-js">
 
 <head>
     <meta charset="utf-8" />
@@ -37,24 +37,44 @@
     * Create your own at http://cspisawesome.com
     -->
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="shortcut icon" href="img/logo-1.png" />
+    <link rel="stylesheet" href="css/onsenui.min.css"/>
+    <link rel="stylesheet" href="css/onsen-css-components.css"/>
+    
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBEy6cTMAe5NZAzrQILCPS5rgoEr9vGTXA",
+      authDomain: "project-39b2d.firebaseapp.com",
+      databaseURL: "https://project-39b2d.firebaseio.com",
+      projectId: "project-39b2d",
+      storageBucket: "project-39b2d.appspot.com",
+      messagingSenderId: "329664062631"
+    };
+    firebase.initializeApp(config);
+  </script>
 
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
-    <title>Hello World</title>
+    <title>Event2Go</title>
 </head>
 
 <body>
-    <div class="app">
-        <h1>PhoneGap</h1>
-        <div id="registration" class="blink">
-            <p class="event waiting">Requesting Registration ID</p>
-            <p class="event received">Registered</p>
-        </div>
-    </div>
-    <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
-    <script type="text/javascript">
-        app.initialize();
-    </script>
+    <div ng-view></div>
+
+    <script src="js/angular.js"></script>
+    <script src="js/angular-route.min.js"></script>
+    <script type="text/javascript" src="js/angularfire.js"></script>
+    <script src="app.js"></script>
+    <script type="text/javascript" src="login/login.js"></script>
+    <script type="text/javascript" src="signup/signup.js"></script>
+    <script type="text/javascript" src="home/home.js"></script>
+    <script type="text/javascript" src="event/event.js"></script>
+    <script type="text/javascript" src="account/account.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script src="js/onsenui.min.js"></script>
+    <script src="js/angular-onsenui.min.js"></script>
 </body>
 </html>
 
