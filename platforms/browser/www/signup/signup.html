@@ -4,7 +4,17 @@
 	<title>E2G- Registration</title>
 </head>
 <body ng-controller="RegisterCtrl">
+<div class="toolbar">
+  <div class="toolbar__center"><a href="#!/home/">Log In</a></div>
+</div>
 hello <br/>
-<label><a href="#!/home/">Log In</a></label>
+  <script>
+    var module = angular.module('Event2Go', ['onsen']);
+    module.controller('PageController', function($scope) {
+      $scope.alert = function(message) {
+        ons.notification.alert(message);
+      };
+    });
+  </script>
 </body>
 </html>
