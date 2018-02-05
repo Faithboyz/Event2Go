@@ -12,12 +12,13 @@ angular.module('Event2Go.signup', ['ngRoute', 'firebase'])
 .controller('RegisterCtrl', ['$scope', '$firebaseAuth', '$location', function($scope, $firebaseAuth, $location){
 
 	$scope.signUp = function(){
-		var username = $scope.user.email;
+		var useremail = $scope.user.email;
 		var password = $scope.user.password;
+		var usename = $scope.user.name;
 
-		if(username && password){
+		if(username !="" && password && useremail){
 			var auth = $firebaseAuth();
-			auth.$createUserWithEmailAndPassword(username, password).then(function(){
+			auth.$createUserWithEmailAndPassword(useremail, password).then(function(){
 				console.log("User Successfully Created");
 				$location.path('/home');
 			}).catch(function(error){
@@ -25,6 +26,7 @@ angular.module('Event2Go.signup', ['ngRoute', 'firebase'])
 				$scope.errorMessage = error.message;
 			});
 		}
+		
 	}
 
 }])

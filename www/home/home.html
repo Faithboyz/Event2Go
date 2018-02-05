@@ -6,8 +6,26 @@
 <body ng-controller="HomeCtrl">
 <div class="toolbar">
   <div class="toolbar__center"><a href="#!/signup/">Sign Up</a></div>
+
+<br />
+<div class="col-sm-10 offset-sm-1 text-center">
+  <form role="form" name="loginForm" novalidate="">
+    <div ng-class="{'has-error': loginForm.email.$invalid && loginForm.email.$touched}">
+      <div><input class="text-input text-input--material" type="email" name="email" ng-model="user.email" placeholder="Email Address" required=""></div>
+      <small class="help-block" ng-show="loginForm.email.$invalid && loginForm.email.$touched">Please enter an Email Address</small>
+    </div>
+      <br />
+    <div ng-class="{'has-error': loginForm.password.$invalid && loginForm.password.$touched}">
+      <div><input type="password" name="password" ng-model="user.password" placeholder="Password" class="text-input text-input--material" required></div>
+      <small class="help-block" ng-show="loginForm.password.$invalid && loginForm.password.$touched">Please enter an Password</small>
+    </div>
+    <br />
+      <p ng-show="errMsg" style="color: red;">{{errorMessage}}</p>
+      <br />
+      <button type="submit" class="button" ng-disabled="loginForm.$invalid" ng-click="signIn()">Login</button>
+      <a class="btn btn-danger" href="#!/home/">Log In</a>
+  </form>
 </div>
-hello <br/>
   <script>
     var module = angular.module('Event2Go', ['onsen']);
     module.controller('PageController', function($scope) {
@@ -15,6 +33,6 @@ hello <br/>
         ons.notification.alert(message);
       };
     });
-  </script>
+  </script>z
 </body>
 </html>
