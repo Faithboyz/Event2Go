@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>WebApp Home Page</title>
+	<title>Welcome</title>
 </head>
 <body ng-controller="WelcomeCtrl">
 <div class="toolbar">
@@ -12,15 +12,142 @@
   </div>
 
   <div class="toolbar__center">
-    Title
+    Events
+
   </div>
 
   <div class="toolbar__right">
-    <span class="toolbar-button toolbar-button--outline">Button</span>
+
+    <span class="toolbar-button toolbar-button--outline">+ Event</span>
+    <button class="button button--outline" ng-click="logout()">Logout</button>
+  
   </div>
+</div>
+
+<div class="toolbar toolbar--material">
+  <div class="toolbar__left toolbar--material__left">
+    <span class="toolbar-button toolbar-button--material">
+      <i class="zmdi zmdi-menu"></i>
+    </span>
+  </div>
+  <div class="toolbar__center toolbar--material__center">
+    Title
+  </div>
+  <div class="toolbar__right toolbar--material__right">
+    <span class="toolbar-button toolbar-button--material">
+      <i class="zmdi zmdi-search"></i>
+    </span>
+    <span class="toolbar-button toolbar-button--material">
+      <i class="zmdi zmdi-favorite"></i>
+    </span>
+    <span class="toolbar-button toolbar-button--material">
+      <i class="zmdi zmdi-more-vert"></i>
+    </span>
+  </div>
+</div>
+
+<div class="tabbar tabbar--top tabbar--top-border">
+  <label class="tabbar__item tabbar--top-border__item">
+    <input type="radio" name="top-tabbar-b" checked="checked">
+    <button class="tabbar__button tabbar--top-border__button">
+      Home
+    </button>
+  </label>
+
+  <label class="tabbar__item tabbar--top-border__item">
+    <input type="radio" name="top-tabbar-b">
+    <button class="tabbar__button tabbar--top-border__button">
+      Comments
+    </button>
+  </label>
+
+  <label class="tabbar__item tabbar--top-border__item">
+    <input type="radio" name="top-tabbar-b">
+    <button class="tabbar__button tabbar--top-border__button">
+      Activity
+    </button>
+  </label>
+</div>
+
+
+<input type="search" value="" placeholder="Search" class="search-input" style="width: 280px;">
+<ul class="list list--material">
+  <li class="list-item list-item--material">
+    <div class="list-item__left list-item--material__left">
+      <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/42/41" alt="Cute kitten">
+    </div>
+
+    <div class="list-item__center list-item--material__center">
+      <div class="list-item__title list-item--material__title">Lily</div>
+      <div class="list-item__subtitle list-item--material__subtitle">Very friendly cat</div>
+    </div>
+  </li>
+
+  <li class="list-item list-item--material">
+    <div class="list-item__left list-item--material__left">
+      <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/40/40" alt="Cute kitten">
+    </div>
+
+    <div class="list-item__center list-item--material__center">
+      <div class="list-item__title list-item--material__title">Molly</div>
+      <div class="list-item__subtitle list-item--material__subtitle">Loves tuna!</div>
+    </div>
+  </li>
+<ul class="list list--material">
+  <li class="list-item list-item--material">
+    <div class="list-item__left list-item--material__left">
+      <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/42/41" alt="Cute kitten">
+    </div>
+
+    <div class="list-item__center list-item--material__center">
+      <div class="list-item__title list-item--material__title">Lily</div>
+      <div class="list-item__subtitle list-item--material__subtitle">Very friendly cat</div>
+    </div>
+  </li>
+
+  <li class="list-item list-item--material">
+    <div class="list-item__left list-item--material__left">
+      <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/40/40" alt="Cute kitten">
+    </div>
+
+    <div class="list-item__center list-item--material__center">
+      <div class="list-item__title list-item--material__title">Molly</div>
+      <div class="list-item__subtitle list-item--material__subtitle">Loves tuna!</div>
+    </div>
+  </li>
+
+</ul>
+</ul>
+<div class="progress-bar">
+<div class="progress-bar progress-bar--indeterminate">
 </div>
 
 
 
+
+
+
+<div class="tabbar tabbar--top tabbar--material">
+  <label class="tabbar__item tabbar--material__item">
+    <input type="radio" name="tabbar-material-b" checked="checked">
+    <button class="tabbar__button tabbar--material__button">
+      <i class="tabbar__icon tabbar--material__icon zmdi zmdi-phone"></i>
+    </button>
+  </label>
+
+  <label class="tabbar__item tabbar--material__item">
+    <input type="radio" name="tabbar-material-b">
+    <button class="tabbar__button tabbar--material__button">
+      <i class="tabbar__icon tabbar--material__icon zmdi zmdi-favorite"></i>
+    </button>
+  </label>
+
+  <label class="tabbar__item tabbar--material__item">
+    <input type="radio" name="tabbar-material-b">
+    <button class="tabbar__button tabbar--material__button">
+      <i class="tabbar__icon tabbar--material__icon zmdi zmdi-pin-account"></i>
+    </button>
+  </label>
+</div>
 </body>
 </html>
