@@ -18,12 +18,12 @@ angular.module('Event2Go.welcome', ['ngRoute', 'firebase'])
 	var ref = firebase.database().ref().child('Articles');
 	$scope.articles = $firebaseArray(ref);	
 
-	$scope.editPost = function(id){
+	$scope.editEvent = function(id){
 		var ref = firebase.database().ref().child('Articles/' + id);
 		$scope.editPostData = $firebaseObject(ref);
 	};
 
-	$scope.updatePost = function(id){
+	$scope.updateEvent = function(id){
 		var ref = firebase.database().ref().child('Articles/' + id);
 		ref.update({
 			title: $scope.editPostData.title,
@@ -41,7 +41,7 @@ angular.module('Event2Go.welcome', ['ngRoute', 'firebase'])
 		$scope.deleteArticle = article;
 	};
 
-	$scope.deletePost = function(deleteArticle){
+	$scope.deleteEvent = function(deleteArticle){
 		$scope.articles.$remove(deleteArticle);
 		$("#deleteModal").modal('hide');
 	};
