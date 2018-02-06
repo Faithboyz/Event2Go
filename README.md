@@ -5,10 +5,10 @@ Senior Project 4FD3
 ## Usage
 
 The applications are currently tested on localhost
-Please use the phone gap desktop and mobile app to view the application on localhost
-  open the project folder
-  start the server
-  view the applications using the link provided by phonegap
+Please use the phone gap desktop and mobile app to view the application on localhost -> 
+  open the project folder -> 
+  start the server -> 
+  view the applications using the link provided by phonegap -> 
   note: mobile load times are higher
 
 ## Home Page 
