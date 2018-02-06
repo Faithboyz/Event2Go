@@ -5,8 +5,12 @@
 </head>
 <body ng-controller="RegisterCtrl">
 <div class="toolbar">
-  <div class="toolbar__center">Register</div>
-</div>
+		<div class="toolbar__left">
+		    <a class="toolbar-button toolbar-button--outline"  href="#!/home">Log In</a>
+		</div>
+		<div class="toolbar__center">Register</div>
+		<div class="toolbar__right"></div>
+	</div>
 <br />
 <div class="col-sm-10 offset-sm-1 text-center">
 	<form role="form" name="regForm" novalidate="">
@@ -37,7 +41,6 @@
 	  	<p ng-show="errMsg" style="color: red;">{{errorMessage}}</p>
 	  	<br />
 	  	<button type="submit" class="button" ng-disabled="regForm.$invalid" ng-click="signUp()">Sign Up</button>
-	  	<a class="btn btn-danger" href="#!/home/">Log In</a>
 	</form>
 </div>
   <script>
