@@ -20,13 +20,14 @@ angular.module('Event2Go.signup', ['ngRoute', 'firebase'])
 			var auth = $firebaseAuth();
 			auth.$createUserWithEmailAndPassword(useremail, password).then(function(){
 				console.log("User Successfully Created");
+		        ons.notification.alert("User Successfully Created");
 				$location.path('/home');
 			}).catch(function(error){
 				$scope.errMsg = true;
 				$scope.errorMessage = error.message;
 			});
 		}
-		
+
 	}
 
 }])

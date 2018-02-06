@@ -9,6 +9,7 @@ angular.module('Event2Go.home', ['ngRoute', 'firebase'])
 	});
 }])
 
+
 .controller('HomeCtrl', ['$scope', '$firebaseAuth', '$location', 'CommonProp', function($scope, $firebaseAuth, $location, CommonProp){
 
 	$scope.username = CommonProp.getUser();
@@ -23,11 +24,14 @@ angular.module('Event2Go.home', ['ngRoute', 'firebase'])
 		var auth = $firebaseAuth();
 
 		auth.$signInWithEmailAndPassword(username, password).then(function(){
-			console.log("User Login Successful");
+			ons.notification.alert("User Login Successful");
+			console.log("User Login Succesfully");
 			CommonProp.setUser($scope.user.email);
 			$location.path('/welcome');
 		}).catch(function(error){
 			$scope.errMsg = true;
+			 ons.notification.alert('Incorrect username or password.');  
+			 console.log("Incorrect username or password.");
 			$scope.errorMessage = error.message;
 		});
 	}
@@ -52,6 +56,7 @@ angular.module('Event2Go.home', ['ngRoute', 'firebase'])
 		logoutUser: function(){
 			auth.$signOut();
 			console.log("Logged Out Succesfully");
+			ons.notification.alert('Logged Out Succesfully');  
 			user = "";
 			localStorage.removeItem('userEmail');
 			$location.path('/home');
