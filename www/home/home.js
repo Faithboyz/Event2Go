@@ -56,10 +56,11 @@ angular.module('Event2Go.home', ['ngRoute', 'firebase'])
 		logoutUser: function(){
 			auth.$signOut();
 			console.log("Logged Out Succesfully");
-			ons.notification.alert('Logged Out Succesfully');  
+			
 			user = "";
 			localStorage.removeItem('userEmail');
 			$location.path('/home');
+			ons.notification.alert('Logged Out Succesfully');  
 		}
 	};
 }]);
