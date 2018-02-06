@@ -14,9 +14,10 @@ angular.module('Event2Go.signup', ['ngRoute', 'firebase'])
 	$scope.signUp = function(){
 		var useremail = $scope.user.email;
 		var password = $scope.user.password;
-		var usename = $scope.user.name;
+		var cpassword = $scope.user.cpassword;
+		var username = $scope.user.name;
 
-		if(username !="" && password && useremail){
+		if(username !="" && password && useremail && password==cpassword){
 			var auth = $firebaseAuth();
 			auth.$createUserWithEmailAndPassword(useremail, password).then(function(){
 				console.log("User Successfully Created");
