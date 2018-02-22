@@ -27,7 +27,10 @@ angular.module('Event2Go.home', ['ngRoute', 'firebase'])
 			ons.notification.alert("User Login Successful");
 			console.log("User Login Succesfully");
 			CommonProp.setUser($scope.user.email);
-			$location.path('/welcome');
+			//var user  = firebase.auth().currentUser;
+			//if(user.emailVerified){
+				$location.path('/welcome');
+			
 		}).catch(function(error){
 			$scope.errMsg = true;
 			 ons.notification.alert('Incorrect username or password.');  

@@ -20,7 +20,15 @@ angular.module('Event2Go.signup', ['ngRoute', 'firebase'])
 		if(username !="" && password && useremail && password==cpassword){
 			var auth = $firebaseAuth();
 			auth.$createUserWithEmailAndPassword(useremail, password).then(function(){
-				console.log("User Successfully Created");
+				auth.$signInWithEmailAndPassword(username, password);
+				var user = firebase.auth().currentUser;
+				user.sendEmailVerification().then(function() {
+					$scope.username = CommonProp.getUser();
+		        	CommonProp.logoutUser();
+		        }, function(error) {
+		          console.log(error.message);
+		        });
+				console.log("User Successfully Created, please verify email");
 		        ons.notification.alert("User Successfully Created");
 				$location.path('/home');
 			}).catch(function(error){
