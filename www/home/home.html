@@ -15,10 +15,10 @@
 	<ons-progress-bar indeterminate></ons-progress-bar>
 	<br />
 
-<div class="col-sm-10 offset-sm-1 text-center" style="width: 25%; background-color: white;" >
-			<br /><br />
-
-	  <form role="form" name="loginForm"   novalidate="">
+<div class="col-sm-10 offset-sm-1 text-center" >
+	<br /><br />
+	<!-- use <ons-card></ons-card> to make a white profile block -->
+  	<form role="form" name="loginForm"   novalidate="">
 	    <div ng-class="{'has-error': loginForm.email.$invalid && loginForm.email.$touched}">
 	      <div><input class="text-input text-input--material" type="email" name="email" ng-model="user.email" placeholder="Email Address" required=""></div>
 	      <small class="help-block" ng-show="loginForm.email.$invalid && loginForm.email.$touched">Please enter an Email Address</small>
@@ -31,14 +31,13 @@
 	    </div>
 	      <p ng-show="errMsg" style="color: red;">{{errorMessage}}</p>
 	      <br />
-	      <a type="button"  name="submit" class="button--cta" style="width: 20%;"   ng-disabled="loginForm.$invalid" 
+	      <a type="button"  name="submit" class="button--cta" style="width: 10%;"   ng-disabled="loginForm.$invalid" 
 	      ng-click="signIn()">Login</a>
 	      <br /></form>
 	      <br />
 		    <a class="toolbar-button toolbar-button--outline"  href="#!/forgetPassword">Forgot Password?</a>
-		 
-			  </form>
-   <br />
+	</form>
+  		
 </div>
   	<script>
 	    var module = angular.module('Event2Go', ['onsen']);

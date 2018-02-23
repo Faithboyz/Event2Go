@@ -19,16 +19,16 @@ angular.module('Event2Go.forgetPassword', ['ngRoute', 'firebase'])
 	}
 
 	$scope.fp = function(){
-		var username = $scope.user.email;
+		var emailAddress = $scope.user.email;
 		var auth = $firebaseAuth();
 
 		auth.$sendPasswordResetEmail(emailAddress).then(function(){
 			ons.notification.alert("Please check email for password recovery");
 			console.log("account recover success");
-			CommonProp.setUser($scope.user.email);
+			//CommonProp.setUser($scope.user.email); *redirect to login 
 			//var user  = firebase.auth().currentUser;
 			//if(user.emailVerified){
-				$location.path('/welcome');
+				$location.path('/home');
 			
 		}).catch(function(error){
 			$scope.errMsg = true;
