@@ -4,7 +4,7 @@
   <title>E2G- Registration</title>
 
 </head>
-<body ng-controller="RegisterCtrl">
+<body ng-controller="HomeCtrl">
 	<div class="toolbar">
 		<div class="toolbar__left">
 		    <a class="toolbar-button toolbar-button--outline"  href="#!/signup">Signup</a>
@@ -31,11 +31,11 @@
 	    </div>
 	      <p ng-show="errMsg" style="color: red;">{{errorMessage}}</p>
 	      <br />
-	      <a type="button"  name="submit" class="button--cta" style="width: 60%;"   ng-disabled="loginForm.$invalid" 
+	      <a type="button"  name="submit" class="button--cta" style="width: 20%;"   ng-disabled="loginForm.$invalid" 
 	      ng-click="signIn()">Login</a>
 	      <br /></form>
 	      <br />
-		    <a class="toolbar-button toolbar-button--outline"  href="#!/forget password">Forgot Password?</a>
+		    <a class="toolbar-button toolbar-button--outline"  href="#!/forgetPassword">Forgot Password?</a>
 		 
 			  </form>
    <br />

@@ -1,16 +1,16 @@
 'use strict';
 
-angular.module('Event2Go.forget_password', ['ngRoute', 'firebase'])
+angular.module('Event2Go.forgetPassword', ['ngRoute', 'firebase'])
 
 .config(['$routeProvider', function($routeProvider){
-	$routeProvider.when('/forget_password', {
-		templateUrl: 'forget_password/fp.html',
-		controller: 'HomeCtrl'
+	$routeProvider.when('/forgetPassword', {
+		templateUrl: 'forgetPassword/forgetPassword.html',
+		controller: 'FPCtrl'
 	});
 }])
 
 
-.controller('HomeCtrl', ['$scope', '$firebaseAuth', '$location', 'CommonProp', function($scope, $firebaseAuth, $location, CommonProp){
+.controller('FPCtrl', ['$scope', '$firebaseAuth', '$location', 'CommonProp', function($scope, $firebaseAuth, $location, CommonProp){
 
 	$scope.username = CommonProp.getUser();
 
