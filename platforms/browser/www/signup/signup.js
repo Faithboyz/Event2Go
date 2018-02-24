@@ -9,18 +9,33 @@ angular.module('Event2Go.signup', ['ngRoute', 'firebase'])
 	});
 }])
 
-.controller('RegisterCtrl', ['$scope', '$firebaseAuth', '$location', function($scope, $firebaseAuth, $location){
+.controller('RegisterCtrl', ['$scope','CommonProp', '$firebaseAuth', '$location', '$firebaseArray', function($scope, CommonProp, $firebaseAuth, $location, $firebaseArray){
+
+	var ref = firebase.database().ref().child('Account');
+	$scope.account = $firebaseArray(ref);
 
 	$scope.signUp = function(){
 		var useremail = $scope.user.email;
 		var password = $scope.user.password;
 		var cpassword = $scope.user.cpassword;
 		var username = $scope.user.name;
+		var description = "Hey, it's sure nice to meet you";
+		var profilePic = "default.jpg";
+		var age = 18;
 
 		if(username !="" && password && useremail && password==cpassword){
 			var auth = $firebaseAuth();
 			auth.$createUserWithEmailAndPassword(useremail, password).then(function(){
-				auth.$signInWithEmailAndPassword(username, password);
+				$scope.account.$add({
+				email: useremail,
+				name: username,
+				description: description,
+				picture: profilePic,
+				age: age
+				}).then(function(ref){
+					console.log(ref);
+				});
+				auth.$signInWithEmailAndPassword(useremail, password);
 				var user = firebase.auth().currentUser;
 				user.sendEmailVerification().then(function() {
 					$scope.username = CommonProp.getUser();
