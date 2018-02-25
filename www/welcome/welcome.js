@@ -49,4 +49,13 @@ angular.module('Event2Go.welcome', ['ngRoute', 'firebase'])
 	$scope.logout = function(){
 		CommonProp.logoutUser();
 	}
-}])
+
+}]);
+
+	function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+	}
+
+	function closeNav() {
+	    document.getElementById("mySidenav").style.width = "0";
+	}

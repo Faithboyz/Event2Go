@@ -6,7 +6,8 @@ angular.module('Event2Go', [
   'Event2Go.home',
   'Event2Go.signup',
   'Event2Go.welcome',
-  'Event2Go.forgetPassword'
+  'Event2Go.forgetPassword',
+  'Event2Go.account'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
 

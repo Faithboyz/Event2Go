@@ -27,13 +27,13 @@ angular.module('Event2Go.home', ['ngRoute', 'firebase'])
 			ons.notification.alert("User Login Successful");
 			console.log("User Login Succesfully");
 			CommonProp.setUser($scope.user.email);
-			//var user  = firebase.auth().currentUser;
-			//if(user.emailVerified){
-				$location.path('/welcome');//}
-			//else{
-				//ons.notification.alert("Email not verified");
-				//CommonProp.logoutUser();
-			//}
+			var user  = firebase.auth().currentUser;
+			if(user.emailVerified){
+				$location.path('/welcome');}
+			else{
+				ons.notification.alert("Email not verified");
+				CommonProp.logoutUser();
+			}
 			
 		}).catch(function(error){
 			$scope.errMsg = true;

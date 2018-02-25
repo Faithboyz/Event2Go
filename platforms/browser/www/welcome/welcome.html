@@ -2,35 +2,20 @@
 <html>
 <head>
 	<title>Event 2 Go</title>
+	<link rel="stylesheet" href="css/slideMenu.css"/>
 </head>
 <body ng-controller="WelcomeCtrl">
-
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#!/welcome">Home</a>
+  <a href="#!/account">Profile</a>
+  <a href="#!/welcome">Events</a>
+  <a href="#!/welcome">Settings</a>
+</div>
 <div class="toolbar">
   <div class="toolbar__left">
-     <span class="toolbar-button toolbar-button--outline">
-      <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
-    </span> 
-    <!-- <ons-splitter var="mySplitter">
-	  <ons-splitter-side side="left" width="220px" collapse swipeable>
-	    <ons-page>
-	      <ons-list>
-	        <ons-list-item ng-click='#!/welcome' tappable>
-	          Home
-	        </ons-list-item>
-	        <ons-list-item ng-click='#!/account)' tappable>
-	          Account
-	        </ons-list-item>
-	        <ons-list-item ng-click='#!/setting' tappable>
-	          Settings
-	        </ons-list-item>
-	        <ons-list-item ng-click="logout()" tappable>
-	          Logout
-	        </ons-list-item>
-	      </ons-list>
-	    </ons-page>
-	  </ons-splitter-side>
-	  <ons-splitter-content page='#!/welcome'></ons-splitter-content>
-	</ons-splitter> -->
+     	<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;
+      	</span>
   </div>
 
   <div class="toolbar__center">
@@ -284,6 +269,71 @@
 	    </button>
 	  </label>
 	</div>
->>>>>>> 16cb111fd07f054e03867d298bed66011f43af93
 </body>
 </html>
+<!-- <ons-splitter var="mySplitter">
+  <ons-splitter-side side="left" width="220px" collapse swipeable>
+    <ons-page>
+      <ons-list>
+        <ons-list-item ng-click="splitter.load('home.html')" tappable>
+          Home
+        </ons-list-item>
+        <ons-list-item ng-click="splitter.load('settings.html')" tappable>
+          Settings
+        </ons-list-item>
+        <ons-list-item ng-click="splitter.load('about.html')" tappable>
+          About
+        </ons-list-item>
+      </ons-list>
+    </ons-page>
+  </ons-splitter-side>
+  <ons-splitter-content page="home.html"></ons-splitter-content>
+</ons-splitter>
+
+<template id="home.html">
+  <ons-page>
+    <ons-toolbar>
+      <div class="left">
+        <ons-toolbar-button ng-click="mySplitter.left.open()">
+          <ons-icon icon="md-menu"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+      <div class="center">
+        Main
+      </div>
+    </ons-toolbar>
+    <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
+      Swipe right to open the menu!
+    </p>
+  </ons-page>
+</template>
+
+<template id="settings.html">
+  <ons-page>
+    <ons-toolbar>
+      <div class="left">
+        <ons-toolbar-button ng-click="mySplitter.left.open()">
+          <ons-icon icon="md-menu"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+      <div class="center">
+        Settings
+      </div>
+    </ons-toolbar>
+  </ons-page>
+</template>
+
+<template id="about.html">
+  <ons-page>
+    <ons-toolbar>
+      <div class="left">
+        <ons-toolbar-button ng-click="mySplitter.left.open()">
+          <ons-icon icon="md-menu"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+      <div class="center">
+        About
+      </div>
+    </ons-toolbar>
+  </ons-page>
+</template> -->
