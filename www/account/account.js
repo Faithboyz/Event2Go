@@ -5,7 +5,7 @@ angular.module('Event2Go.account', ['ngRoute', 'firebase'])
 .config(['$routeProvider', function($routeProvider){
 	$routeProvider.when('/account',{
 		templateUrl: 'account/account.html',
-		controller: 'account'
+		controller: 'AccountCtrl'
 	});
 }])
 .controller('AccountCtrl', ['$scope', 'CommonProp', '$firebaseArray', '$firebaseObject', '$location', function($scope, CommonProp, $firebaseArray, $firebaseObject, $location){
@@ -49,4 +49,11 @@ angular.module('Event2Go.account', ['ngRoute', 'firebase'])
 	$scope.logout = function(){
 		CommonProp.logoutUser();
 	}
-}])
+}]);
+	function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+	}
+
+	function closeNav() {
+	    document.getElementById("mySidenav").style.width = "0";
+	}
