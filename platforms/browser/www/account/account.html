@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app id="ng-app">
 <head>
 	<title>E2G-profile</title>
   <link rel="stylesheet" href="css/slideMenu.css"/>
@@ -36,15 +36,15 @@
           <img src="img/default.jpg" alt="" class="img-rounded img-responsive" />
       </div><br/>
       <div class="col-sm-10 offset-sm-1 text-center">
-          <h4>Donald Trump</h4>
+          <h4><pre>{{userAccount.name| json }}</pre></h4>
           <small><cite title="San Francisco, USA">San Francisco, USA <i class="glyphicon glyphicon-map-marker">
           </i></cite></small>
           <p>
-            <i class="glyphicon glyphicon-envelope"></i>email@example.com
+            <i class="glyphicon glyphicon-envelope"></i>{{username}}
             <br />
-            <i class="glyphicon glyphicon-globe"></i><a href="http://www.jquery2dotnet.com">My events</a>
+            <i class="glyphicon glyphicon-globe"></i><pre>{{userAccount.age| json }}</pre>
             <br />
-            <i class="glyphicon glyphicon-gift"></i>June 02, 1988</p>
+            <i class="glyphicon glyphicon-gift"></i><pre>{{userAccount.description| json }}</pre></p>
       </div>
     </div>
 	</div>

@@ -10,41 +10,18 @@ angular.module('Event2Go.account', ['ngRoute', 'firebase'])
 }])
 .controller('AccountCtrl', ['$scope', 'CommonProp', '$firebaseArray', '$firebaseObject', '$location', function($scope, CommonProp, $firebaseArray, $firebaseObject, $location){
 	$scope.username = CommonProp.getUser();
+	$scope.userAccount = {};
+	var ref = firebase.database().ref("Account");
+	var rep = ref.orderByChild("email").equalTo($scope.username).on("child_added", function(snapshot) {
+			$scope.userAccount = snapshot.val();
+			console.log(userAccount.name);
+		}, function(error) {
+			  // The Promise was rejected.
+			  console.error(error);});
 
 	if(!$scope.username){
 		$location.path('/home');
 	}
-
-	// var ref = firebase.database().ref().child('Articles');
-	// $scope.articles = $firebaseArray(ref);	
-
-	// $scope.editEvent = function(id){
-	// 	var ref = firebase.database().ref().child('Articles/' + id);
-	// 	$scope.editPostData = $firebaseObject(ref);
-	// };
-
-	// $scope.updateEvent = function(id){
-	// 	var ref = firebase.database().ref().child('Articles/' + id);
-	// 	ref.update({
-	// 		title: $scope.editPostData.title,
-	// 		post: $scope.editPostData.post
-	// 	}).then(function(ref){
-	// 		$scope.$apply(function(){
-	// 			$("#editModal").modal('hide');
-	// 		});
-	// 	}, function(error){
-	// 		console.log(error);
-	// 	});
-	// };
-
-	// $scope.deleteCnf = function(article){
-	// 	$scope.deleteArticle = article;
-	// };
-
-	// $scope.deleteEvent = function(deleteArticle){
-	// 	$scope.articles.$remove(deleteArticle);
-	// 	$("#deleteModal").modal('hide');
-	// };
 
 	$scope.logout = function(){
 		CommonProp.logoutUser();
