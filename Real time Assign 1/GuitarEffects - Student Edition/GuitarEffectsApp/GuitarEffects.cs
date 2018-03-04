@@ -386,13 +386,14 @@ namespace BlueWave.Interop.Asio.Test
             // and wrap the delay buffer counter
             if (_counter >= MaxBuffers) _counter = 0;
 
-            //double rev = -3 * time / Math.Log(_counter, 10);
+            //double rev = -3 * wtime / Math.Log(_counter, 10);
 
             // the effect output
             float delayL = 0;
+            float delayR = 0;
 
 
-            for (int index = 1; index < outputL.BufferSize; index++)
+            for (int index = 1; index < outputL.BufferSize*2; index+=2)
             {
                 _delayBuffer[index, _counter] = input[index];
 
@@ -401,20 +402,27 @@ namespace BlueWave.Interop.Asio.Test
                 // y[n] = x[n – d] + gy[n - d]
 
                 if ((_counter - _FBDelay) >= 0)
+                {
                     delayL = _delayBuffer[index, (_counter - _FBDelay)] + (float)0.708 * _delayRBbuffer[index, (_counter - _FBDelay)];
+                    delayR = _delayBuffer[index+1, (_counter - _FBDelay)] + (float)0.708 * _delayRBbuffer[index+1, (_counter - _FBDelay)];
+
+                }
                 else
+                {
                     delayL = _delayBuffer[index, (_counter - _FBDelay + MaxBuffers)] + (float)0.708 * _delayRBbuffer[index, (_counter - _FBDelay + MaxBuffers)];
-     
+                    delayR = _delayBuffer[index+1, (_counter - _FBDelay + MaxBuffers)] + (float)0.708 * _delayRBbuffer[index+1, (_counter - _FBDelay + MaxBuffers)];
+                }
                 // y[n] = -gx[n] + x[n - d] + gy[n – d]
                 //All pass filter
                 //delayL = -(float)g* input[index] + _delayBuffer[index, (_counter - _FBDelay)] + (float)g * _delayBuffer[index, (_counter - _FBDelay + MaxBuffers)];
 
                 // update the feedback buffer
-                _delayRBbuffer[index, _counter] = delayL;
+                _delayBuffer[index, _counter] = delayL;
+                _delayRBbuffer[index, _counter] = delayR;
 
                 // write the output buffer with the effect output
                 outputL[index] = delayL;
-                outputR[index] = delayL;
+                outputR[index] = delayR;
             }
         }
     }
