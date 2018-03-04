@@ -390,34 +390,27 @@ namespace BlueWave.Interop.Asio.Test
 
             // the effect output
             float delayL = 0;
-            float delayR = 0;
 
 
             for (int index = 1; index < outputL.BufferSize; index++)
             {
                 _delayBuffer[index, _counter] = input[index];
 
+                //double dt = time / Math.Pow(2, ((double)index / _FBDelay));
+                //double g = Math.Pow(10, -((3 * dt) / rev));
                 // y[n] = x[n – d] + gy[n - d]
-                //x = input 
-                //y= input
-                //n= index
-                //d= _FBDelay
-                //g= 0.7   (float)0.7
 
                 if ((_counter - _FBDelay) >= 0)
-                    delayL = _delayBuffer[index, (_counter - _FBDelay)] + (float)0.3 * _delayRBbuffer[index, (_counter - _FBDelay)];
+                    delayL = _delayBuffer[index, (_counter - _FBDelay)] + (float)0.708 * _delayRBbuffer[index, (_counter - _FBDelay)];
                 else
-                    delayL = _delayBuffer[index, (_counter - _FBDelay + MaxBuffers)] + (float)0.3 * _delayRBbuffer[index, (_counter - _FBDelay + MaxBuffers)];
-                //delayR = _delayBuffer[(index + 1), (_counter - _FBDelay)] + (float)0.3 * _delayRBbuffer[(index+1), (_counter - _FBDelay)];
-
-
+                    delayL = _delayBuffer[index, (_counter - _FBDelay + MaxBuffers)] + (float)0.708 * _delayRBbuffer[index, (_counter - _FBDelay + MaxBuffers)];
+     
                 // y[n] = -gx[n] + x[n - d] + gy[n – d]
                 //All pass filter
                 //delayL = -(float)g* input[index] + _delayBuffer[index, (_counter - _FBDelay)] + (float)g * _delayBuffer[index, (_counter - _FBDelay + MaxBuffers)];
 
                 // update the feedback buffer
                 _delayRBbuffer[index, _counter] = delayL;
-                //_delayRBbuffer[(index + 1), _counter] = delayR;
 
                 // write the output buffer with the effect output
                 outputL[index] = delayL;
