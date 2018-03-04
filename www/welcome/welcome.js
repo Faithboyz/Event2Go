@@ -15,14 +15,6 @@ angular.module('Event2Go.welcome', ['ngRoute', 'firebase'])
 		$location.path('/home');
 	}
 	
-	$scope.userAccount = {};
-	var ref = firebase.database().ref("Account");
-	var rep = ref.orderByChild("email").equalTo($scope.username).on("child_added", function(snapshot) {
-			$scope.userAccount = snapshot.val();
-			console.log(userAccount.name);
-		}, function(error) {
-			  // The Promise was rejected.
-			  console.error(error);});
 
 	var ref = firebase.database().ref().child('Articles');
 	$scope.articles = $firebaseArray(ref);	
