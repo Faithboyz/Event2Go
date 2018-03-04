@@ -29,6 +29,7 @@ namespace BlueWave.Interop.Asio.Test
         // delay in whole buffers
         private static int _FBDelay = 32;
         private static float[,] _delayFBbuffer;
+        private static float[,] _delayRBbuffer;
 
         private static float[,] _delayINbuffer;
         private static float[,] _delayOUTbuffer;
@@ -179,6 +180,10 @@ namespace BlueWave.Interop.Asio.Test
 
             // create standard sized buffers with a size of PreferredSize x MaxBuffers 
             _delayBuffer = new float[driver.BufferSizex.PreferredSize, MaxBuffers];
+
+            // create a feedback buffer for the delay effect
+            _delayRBbuffer = new float[driver.BufferSizex.PreferredSize, MaxBuffers];
+
 
             // create a feedback buffer for the delay effect
             _delayFBbuffer = new float[driver.BufferSizex.PreferredSize, MaxBuffers];
@@ -375,31 +380,35 @@ namespace BlueWave.Interop.Asio.Test
 
         public static void reverbEffect(Channel input, Channel outputL, Channel outputR)
         {
-            double time = 50;
+            //double time = 50;
 
             _counter++;
             // and wrap the delay buffer counter
             if (_counter >= MaxBuffers) _counter = 0;
 
-            double rev = -3 * time / Math.Log(_counter, 10);
+            //double rev = -3 * time / Math.Log(_counter, 10);
 
             // the effect output
             float delayL = 0;
             float delayR = 0;
 
 
-            for (int index = 0; index < outputL.BufferSize; index++)
+            for (int index = 1; index < outputL.BufferSize; index++)
             {
-                // copy the input buffer to our delay array
                 _delayBuffer[index, _counter] = input[index];
 
-                //calculate the value g for introducing delay
-                double dt = time / Math.Pow(2, ((double)index / _FBDelay));
-                double g = Math.Pow(10, -((3 * dt) / rev));
-
                 // y[n] = x[n – d] + gy[n - d]
-                delayL = _delayBuffer[index, (_counter - _FBDelay)] + (float)g * _delayBuffer[index, (_counter - _FBDelay + MaxBuffers)];
-                delayR = _delayBuffer[(index + 1), (_counter - _FBDelay)] + (float)g * _delayBuffer[(index + 1), (_counter - _FBDelay + MaxBuffers)];
+                //x = input 
+                //y= input
+                //n= index
+                //d= _FBDelay
+                //g= 0.7   (float)0.7
+
+                if ((_counter - _FBDelay) >= 0)
+                    delayL = _delayBuffer[index, (_counter - _FBDelay)] + (float)0.3 * _delayRBbuffer[index, (_counter - _FBDelay)];
+                else
+                    delayL = _delayBuffer[index, (_counter - _FBDelay + MaxBuffers)] + (float)0.3 * _delayRBbuffer[index, (_counter - _FBDelay + MaxBuffers)];
+                //delayR = _delayBuffer[(index + 1), (_counter - _FBDelay)] + (float)0.3 * _delayRBbuffer[(index+1), (_counter - _FBDelay)];
 
 
                 // y[n] = -gx[n] + x[n - d] + gy[n – d]
@@ -407,14 +416,13 @@ namespace BlueWave.Interop.Asio.Test
                 //delayL = -(float)g* input[index] + _delayBuffer[index, (_counter - _FBDelay)] + (float)g * _delayBuffer[index, (_counter - _FBDelay + MaxBuffers)];
 
                 // update the feedback buffer
-                _delayFBbuffer[index, _counter] = delayL;
-                _delayFBbuffer[(index + 1), _counter] = delayR;
+                _delayRBbuffer[index, _counter] = delayL;
+                //_delayRBbuffer[(index + 1), _counter] = delayR;
 
                 // write the output buffer with the effect output
                 outputL[index] = delayL;
-                outputR[index] = delayR;
+                outputR[index] = delayL;
             }
-
         }
     }
 
