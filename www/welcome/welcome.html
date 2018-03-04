@@ -1,339 +1,198 @@
-<!DOCTYPE html>
-<html>
+<html >
 <head>
-	<title>Event 2 Go</title>
-	<link rel="stylesheet" href="css/slideMenu.css"/>
+  <title>Event 2 Go</title>
+  <link rel="stylesheet" href="css/slideMenu.css"/>
 </head>
 <body ng-controller="WelcomeCtrl">
-<div id="mySidenav" class="sidenav">
-	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-	<a href="#!/welcome">Home</a>
-	<a href="#!/account">Profile</a>
-	<a href="#!/welcome">Events</a>
-	<a href="#!/welcome">Settings</a>
-</div>
-<div class="toolbar">
-  <div class="toolbar__left">
-     	<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;
-      	</span>
-  </div>
+<ons-page >
+  <ons-tabbar swipeable position="auto">
+    <ons-tab page="tab1" label="Home" icon="ion-home, material:md-home"  active>
+    </ons-tab>
+    <ons-tab page="tab2" label="Profile" icon="md-face" active-icon="md-face">
+    </ons-tab>
+    <ons-tab page="tab3" label="Settings" icon="md-settings" >
+    </ons-tab>
+  </ons-tabbar>
+</ons-page>
+<template id="tab1" >
+  <ons-page id="Tab1" >
+<!--  <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="#!/welcome">Home</a>
+      <a href="#!/account">Profile</a>
+      <a href="#!/welcome">Events</a>
+      <a href="#!/welcome">Settings</a>
+    </div> -->
+    <div class="toolbar">
+      <div class="toolbar__left">
+          <!-- <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;
+            </span> -->
+          <span class="toolbar-button toolbar-button--outline" ng-click="">+ Event</span>  
+      </div>
 
-  <div class="toolbar__center">
-    Events
+      <div class="toolbar__center">
+        Events
 
-  </div>
+      </div>
 
-  <div class="toolbar__right">
+      <div class="toolbar__right">
 
-    <!--<span class="toolbar-button toolbar-button--outline">+ Event</span>-->
-    <span class="toolbar-button toolbar-button--outline" ng-click="logout()">Logout</span>
-  
-  </div>
-</div>
-
-<div class="tabbar tabbar--top tabbar--top-border">
-  <label class="tabbar__item tabbar--top-border__item">
-    <input type="radio" name="top-tabbar-b" checked="checked">
-    <button class="tabbar__button tabbar--top-border__button">
-      Home
-    </button>
-  </label>
-
-  <label class="tabbar__item tabbar--top-border__item">
-    <input type="radio" name="top-tabbar-b">
-    <button class="tabbar__button tabbar--top-border__button">
-      Comments
-    </button>
-  </label>
-
-  <label class="tabbar__item tabbar--top-border__item">
-    <input type="radio" name="top-tabbar-b">
-    <button class="tabbar__button tabbar--top-border__button">
-      Activity
-    </button>
-  </label>
-</div>
-
-    <!--<span class="toolbar-button toolbar-button--outline" ng-click="logout()">Logout</span>-->
-<input type="search" value="" placeholder="Search" class="search-input" style="width: 280px;">
-<ul class="list list--material">
-  <li class="list-item list-item--material">
-    <div class="list-item__left list-item--material__left">
-      <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/42/41" alt="Cute kitten">
+        <!--<span class="toolbar-button toolbar-button--outline">+ Event</span>-->
+        <span class="toolbar-button toolbar-button--outline" ng-click="logout()">Logout</span>
+      
+      </div>
     </div>
 
-    <div class="list-item__center list-item--material__center">
-      <div class="list-item__title list-item--material__title">Lily</div>
-      <div class="list-item__subtitle list-item--material__subtitle">Very friendly cat</div>
-    </div>
-  </li>
+    <div class="tabbar tabbar--top tabbar--top-border">
+      <label class="tabbar__item tabbar--top-border__item">
+        <input type="radio" name="top-tabbar-b" checked="checked">
+        <button class="tabbar__button tabbar--top-border__button">
+          Home
+        </button>
+      </label>
 
-  <li class="list-item list-item--material">
-    <div class="list-item__left list-item--material__left">
-      <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/40/40" alt="Cute kitten">
-    </div>
+      <label class="tabbar__item tabbar--top-border__item">
+        <input type="radio" name="top-tabbar-b">
+        <button class="tabbar__button tabbar--top-border__button">
+          Comments
+        </button>
+      </label>
 
-    <div class="list-item__center list-item--material__center">
-      <div class="list-item__title list-item--material__title">Molly</div>
-      <div class="list-item__subtitle list-item--material__subtitle">Loves tuna!</div>
-    </div>
-  </li>
-<ul class="list list--material">
-  <li class="list-item list-item--material">
-    <div class="list-item__left list-item--material__left">
-      <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/42/41" alt="Cute kitten">
-    </div>
-
-    <div class="list-item__center list-item--material__center">
-      <div class="list-item__title list-item--material__title">Lily</div>
-      <div class="list-item__subtitle list-item--material__subtitle">Very friendly cat</div>
-    </div>
-  </li>
-
-  <li class="list-item list-item--material">
-    <div class="list-item__left list-item--material__left">
-      <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/40/40" alt="Cute kitten">
+      <label class="tabbar__item tabbar--top-border__item">
+        <input type="radio" name="top-tabbar-b">
+        <button class="tabbar__button tabbar--top-border__button">
+          Activity
+        </button>
+      </label>
     </div>
 
-    <div class="list-item__center list-item--material__center">
-      <div class="list-item__title list-item--material__title">Molly</div>
-      <div class="list-item__subtitle list-item--material__subtitle">Loves tuna!</div>
-    </div>
-  </li>
+        <!--<span class="toolbar-button toolbar-button--outline" ng-click="logout()">Logout</span>-->
+    <input type="search" value="" placeholder="Search" class="search-input" style="width: 280px;">
+    <ul class="list list--material">
+      <li class="list-item list-item--material">
+        <div class="list-item__left list-item--material__left">
+          <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/42/41" alt="Cute kitten">
+        </div>
 
-</ul>
-</ul>
-<div class="progress-bar">
-<div class="progress-bar progress-bar--indeterminate">
-</div>
+        <div class="list-item__center list-item--material__center">
+          <div class="list-item__title list-item--material__title">Lily</div>
+          <div class="list-item__subtitle list-item--material__subtitle">Very friendly cat</div>
+        </div>
+      </li>
+
+      <li class="list-item list-item--material">
+        <div class="list-item__left list-item--material__left">
+          <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/40/40" alt="Cute kitten">
+        </div>
+
+        <div class="list-item__center list-item--material__center">
+          <div class="list-item__title list-item--material__title">Molly</div>
+          <div class="list-item__subtitle list-item--material__subtitle">Loves tuna!</div>
+        </div>
+      </li>
+    <ul class="list list--material">
+      <li class="list-item list-item--material">
+        <div class="list-item__left list-item--material__left">
+          <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/42/41" alt="Cute kitten">
+        </div>
+
+        <div class="list-item__center list-item--material__center">
+          <div class="list-item__title list-item--material__title">Lily</div>
+          <div class="list-item__subtitle list-item--material__subtitle">Very friendly cat</div>
+        </div>
+      </li>
+
+      <li class="list-item list-item--material">
+        <div class="list-item__left list-item--material__left">
+          <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/40/40" alt="Cute kitten">
+        </div>
+
+        <div class="list-item__center list-item--material__center">
+          <div class="list-item__title list-item--material__title">Molly</div>
+          <div class="list-item__subtitle list-item--material__subtitle">Loves tuna!</div>
+        </div>
+      </li>
+
+      </ul>
+      </ul>
+      <div class="tabbar tabbar--top tabbar--material">
+        <label class="tabbar__item tabbar--material__item">
+          <input type="radio" name="tabbar-material-b" checked="checked">
+          <button class="tabbar__button tabbar--material__button">
+            <i class="tabbar__icon tabbar--material__icon zmdi zmdi-phone"></i>
+          </button>
+        </label>
+
+        <label class="tabbar__item tabbar--material__item">
+          <input type="radio" name="tabbar-material-b">
+          <button class="tabbar__button tabbar--material__button">
+            <i class="tabbar__icon tabbar--material__icon zmdi zmdi-favorite"></i>
+          </button>
+        </label>
+
+        <label class="tabbar__item tabbar--material__item">
+          <input type="radio" name="tabbar-material-b">
+          <button class="tabbar__button tabbar--material__button">
+            <i class="tabbar__icon tabbar--material__icon zmdi zmdi-pin-account"></i>
+          </button>
+        </label>
+      </div>
+    </ons-page>
+  </template>
+
+  <template id="tab2">
+    <ons-page id="Tab2">
+      <div class="toolbar">
+        <div class="toolbar__left">
+            <span class="toolbar-button toolbar-button--outline" ng-click="">Edit</span>
+        </div>
+
+        <div class="toolbar__center">
+          User Profile
+        </div>
+
+        <div class="toolbar__right">
+          <span class="toolbar-button toolbar-button--outline" ng-click="logout()">Logout</span>
+        </div>
+      </div>
+      <br />
 
 
+      <ons-card>
+        <div class="col-sm-10 offset-sm-1 text-center" >
+          <div class="row col-sm-10 offset-sm-1 text-center" >
+            <div class="col-sm-10 offset-sm-1 text-center">
+                <img src="img/default.jpg" alt="" class="img-rounded img-responsive" />
+            </div><br/>
+            <div class="col-sm-10 offset-sm-1 text-center">
+                <h4><pre>{{userAccount.name| json }}</pre></h4>
+                <small><cite title="San Francisco, USA">San Francisco, USA <i class="glyphicon glyphicon-map-marker">
+                </i></cite></small>
+                <p>
+                  <i class="glyphicon glyphicon-envelope"></i>{{username}}
+                  <br />
+                  <i class="glyphicon glyphicon-globe"></i><pre>{{userAccount.age| json }}</pre>
+                  <br />
+                  <i class="glyphicon glyphicon-gift"></i><pre>{{userAccount.description| json }}</pre></p>
+            </div>
+          </div>
+        </div>
+      </ons-card>
+    </ons-page>
+  </template>
 
-
-
-
-<div class="tabbar tabbar--top tabbar--material">
-  <label class="tabbar__item tabbar--material__item">
-    <input type="radio" name="tabbar-material-b" checked="checked">
-    <button class="tabbar__button tabbar--material__button">
-      <i class="tabbar__icon tabbar--material__icon zmdi zmdi-phone"></i>
-    </button>
-  </label>
-
-  <label class="tabbar__item tabbar--material__item">
-    <input type="radio" name="tabbar-material-b">
-    <button class="tabbar__button tabbar--material__button">
-      <i class="tabbar__icon tabbar--material__icon zmdi zmdi-favorite"></i>
-    </button>
-  </label>
-
-  <label class="tabbar__item tabbar--material__item">
-    <input type="radio" name="tabbar-material-b">
-    <button class="tabbar__button tabbar--material__button">
-      <i class="tabbar__icon tabbar--material__icon zmdi zmdi-pin-account"></i>
-    </button>
-  </label>
-</div>
-=======
-	<div class="toolbar">
-	  <div class="toolbar__left">
-	    <span class="toolbar-button toolbar-button--outline">
-	      <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
-	    </span>
-	  </div>
-	  <div class="toolbar__center">
-	    Events
-	  </div>
-	  <div class="toolbar__right">
-	    <span class="toolbar-button toolbar-button--outline">+ Event</span>
-	    <span class="toolbar-button toolbar-button--outline" ng-click="logout()" >Log Out</span>
-	  </div>
-	</div>
-	
-	<div class="toolbar toolbar--material">
-	  <div class="toolbar__left toolbar--material__left">
-	    <span class="toolbar-button toolbar-button--material">
-	      <i class="zmdi zmdi-menu"></i>
-	    </span>
-	  </div>
-	  <div class="toolbar__center toolbar--material__center">
-	    Event App
-	  </div>
-	  <div class="toolbar__right toolbar--material__right">
-	    <span class="toolbar-button toolbar-button--material">
-	      <i class="zmdi zmdi-search"></i>
-	    </span>
-	    <span class="toolbar-button toolbar-button--material">
-	      <i class="zmdi zmdi-favorite"></i>
-	    </span>
-	    <span class="toolbar-button toolbar-button--material">
-	      <i class="zmdi zmdi-more-vert"></i>
-	    </span>
-	  </div>
-	</div>
-
-	<div class="tabbar tabbar--top tabbar--top-border">
-	  <label class="tabbar__item tabbar--top-border__item">
-	    <input type="radio" name="top-tabbar-b" checked="checked">
-	    <button class="tabbar__button tabbar--top-border__button">
-	      Home
-	    </button>
-	  </label>
-
-	  <label class="tabbar__item tabbar--top-border__item">
-	    <input type="radio" name="top-tabbar-b">
-	    <button class="tabbar__button tabbar--top-border__button">
-	      Events
-	    </button>
-	  </label>
-
-	  <label class="tabbar__item tabbar--top-border__item">
-	    <input type="radio" name="top-tabbar-b">
-	    <button class="tabbar__button tabbar--top-border__button">
-	      Activity
-	    </button>
-	  </label>
-	</div>
-
-	<input type="search" value="" placeholder="Search" class="search-input" style="width: 280px;">
-	<ul class="list list--material">
-	  <li class="list-item list-item--material">
-	    <div class="list-item__left list-item--material__left">
-	      <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/42/41" alt="Cute kitten">
-	    </div>
-
-	    <div class="list-item__center list-item--material__center">
-	      <div class="list-item__title list-item--material__title">Lily</div>
-	      <div class="list-item__subtitle list-item--material__subtitle">Very friendly cat</div>
-	    </div>
-	  </li>
-
-	  <li class="list-item list-item--material">
-	    <div class="list-item__left list-item--material__left">
-	      <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/40/40" alt="Cute kitten">
-	    </div>
-
-	    <div class="list-item__center list-item--material__center">
-	      <div class="list-item__title list-item--material__title">Molly</div>
-	      <div class="list-item__subtitle list-item--material__subtitle">Loves tuna!</div>
-	    </div>
-	  </li>
-	<ul class="list list--material">
-	  <li class="list-item list-item--material">
-	    <div class="list-item__left list-item--material__left">
-	      <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/42/41" alt="Cute kitten">
-	    </div>
-
-	    <div class="list-item__center list-item--material__center">
-	      <div class="list-item__title list-item--material__title">Lily</div>
-	      <div class="list-item__subtitle list-item--material__subtitle">Very friendly cat</div>
-	    </div>
-	  </li>
-
-	  <li class="list-item list-item--material">
-	    <div class="list-item__left list-item--material__left">
-	      <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/40/40" alt="Cute kitten">
-	    </div>
-
-	    <div class="list-item__center list-item--material__center">
-	      <div class="list-item__title list-item--material__title">Molly</div>
-	      <div class="list-item__subtitle list-item--material__subtitle">Loves tuna!</div>
-	    </div>
-	  </li>
-
-	</ul>
-	</ul>
-	<div class="progress-bar">
-	<div class="progress-bar progress-bar--indeterminate">
-	</div>
-
-	<div class="tabbar tabbar--top tabbar--material">
-	  <label class="tabbar__item tabbar--material__item">
-	    <input type="radio" name="tabbar-material-b" checked="checked">
-	    <button class="tabbar__button tabbar--material__button">
-	      <i class="tabbar__icon tabbar--material__icon zmdi zmdi-phone"></i>
-	    </button>
-	  </label>
-
-	  <label class="tabbar__item tabbar--material__item">
-	    <input type="radio" name="tabbar-material-b">
-	    <button class="tabbar__button tabbar--material__button">
-	      <i class="tabbar__icon tabbar--material__icon zmdi zmdi-favorite"></i>
-	    </button>
-	  </label>
-
-	  <label class="tabbar__item tabbar--material__item">
-	    <input type="radio" name="tabbar-material-b">
-	    <button class="tabbar__button tabbar--material__button">
-	      <i class="tabbar__icon tabbar--material__icon zmdi zmdi-pin-account"></i>
-	    </button>
-	  </label>
-	</div>
+  <template id="tab3">
+    <ons-page id="Tab2">
+      <p style="text-align: center;">
+        This is the Third page.
+      </p>
+    </ons-page>
+  </template>
+  <script>
+  document.addEventListener('prechange', function(event) {
+    document.querySelector('ons-toolbar .center')
+      .innerHTML = event.tabItem.getAttribute('label');
+  });
+  </script>
 </body>
 </html>
-<!-- <ons-splitter var="mySplitter">
-  <ons-splitter-side side="left" width="220px" collapse swipeable>
-    <ons-page>
-      <ons-list>
-        <ons-list-item ng-click="splitter.load('home.html')" tappable>
-          Home
-        </ons-list-item>
-        <ons-list-item ng-click="splitter.load('settings.html')" tappable>
-          Settings
-        </ons-list-item>
-        <ons-list-item ng-click="splitter.load('about.html')" tappable>
-          About
-        </ons-list-item>
-      </ons-list>
-    </ons-page>
-  </ons-splitter-side>
-  <ons-splitter-content page="home.html"></ons-splitter-content>
-</ons-splitter>
-
-<template id="home.html">
-  <ons-page>
-    <ons-toolbar>
-      <div class="left">
-        <ons-toolbar-button ng-click="mySplitter.left.open()">
-          <ons-icon icon="md-menu"></ons-icon>
-        </ons-toolbar-button>
-      </div>
-      <div class="center">
-        Main
-      </div>
-    </ons-toolbar>
-    <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
-      Swipe right to open the menu!
-    </p>
-  </ons-page>
-</template>
-
-<template id="settings.html">
-  <ons-page>
-    <ons-toolbar>
-      <div class="left">
-        <ons-toolbar-button ng-click="mySplitter.left.open()">
-          <ons-icon icon="md-menu"></ons-icon>
-        </ons-toolbar-button>
-      </div>
-      <div class="center">
-        Settings
-      </div>
-    </ons-toolbar>
-  </ons-page>
-</template>
-
-<template id="about.html">
-  <ons-page>
-    <ons-toolbar>
-      <div class="left">
-        <ons-toolbar-button ng-click="mySplitter.left.open()">
-          <ons-icon icon="md-menu"></ons-icon>
-        </ons-toolbar-button>
-      </div>
-      <div class="center">
-        About
-      </div>
-    </ons-toolbar>
-  </ons-page>
-</template> -->
