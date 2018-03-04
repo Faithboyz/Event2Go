@@ -375,19 +375,18 @@ namespace BlueWave.Interop.Asio.Test
 
         public static void reverbEffect(Channel input, Channel outputL, Channel outputR)
         {
-            int delay = 5;
             double time = 50;
-            double gain = 0.75;
-            double rev = -3 * time / Math.Log(gain, 10);
+
+            _counter++;
+            // and wrap the delay buffer counter
+            if (_counter >= MaxBuffers) _counter = 0;
+
+            double rev = -3 * time / Math.Log(_counter, 10);
 
             // the effect output
             float delayL = 0;
             float delayR = 0;
 
-            // increment the delay buffer counter
-            _counter++;
-            // and wrap the delay buffer counter
-            if (_counter >= MaxBuffers) _counter = 0;
 
             for (int index = 0; index < outputL.BufferSize; index++)
             {
@@ -395,12 +394,12 @@ namespace BlueWave.Interop.Asio.Test
                 _delayBuffer[index, _counter] = input[index];
 
                 //calculate the value g for introducing delay
-                double dt = time / Math.Pow(2, ((double)index / delay));
+                double dt = time / Math.Pow(2, ((double)index / _FBDelay));
                 double g = Math.Pow(10, -((3 * dt) / rev));
 
                 // y[n] = x[n – d] + gy[n - d]
                 delayL = _delayBuffer[index, (_counter - _FBDelay)] + (float)g * _delayBuffer[index, (_counter - _FBDelay + MaxBuffers)];
-                delayR = _delayBuffer[(index+1), (_counter - _FBDelay)] + (float)g * _delayBuffer[(index+1), (_counter - _FBDelay + MaxBuffers)];
+                delayR = _delayBuffer[(index + 1), (_counter - _FBDelay)] + (float)g * _delayBuffer[(index + 1), (_counter - _FBDelay + MaxBuffers)];
 
 
                 // y[n] = -gx[n] + x[n - d] + gy[n – d]
@@ -409,7 +408,7 @@ namespace BlueWave.Interop.Asio.Test
 
                 // update the feedback buffer
                 _delayFBbuffer[index, _counter] = delayL;
-                _delayFBbuffer[(index+1), _counter] = delayR;
+                _delayFBbuffer[(index + 1), _counter] = delayR;
 
                 // write the output buffer with the effect output
                 outputL[index] = delayL;
