@@ -403,14 +403,18 @@ namespace BlueWave.Interop.Asio.Test
 
                 if ((_counter - _FBDelay) >= 0)
                 {
-                    delayL = _delayBuffer[index, (_counter - _FBDelay)] + (float)0.708 * _delayRBbuffer[index, (_counter - _FBDelay)];
-                    delayR = _delayBuffer[index+1, (_counter - _FBDelay)] + (float)0.708 * _delayRBbuffer[index+1, (_counter - _FBDelay)];
+                   // delayL = _delayBuffer[index, (_counter - _FBDelay)] + (float)0.708 * _delayRBbuffer[index, (_counter - _FBDelay)];
+                   // delayR = _delayBuffer[index+1, (_counter - _FBDelay)] + (float)0.708 * _delayRBbuffer[index+1, (_counter - _FBDelay)];
+                    delayL = _delayBuffer[index, (_counter - _FBDelay)] + (float)0.7 * _delayFBbuffer[index, (_counter - _FBDelay)];
+                    delayR = _delayBuffer[index, (_counter - _FBDelay)] + (float)0.7 * _delayFBbuffer[index, (_counter - _FBDelay)];
 
                 }
                 else
                 {
-                    delayL = _delayBuffer[index, (_counter - _FBDelay + MaxBuffers)] + (float)0.708 * _delayRBbuffer[index, (_counter - _FBDelay + MaxBuffers)];
-                    delayR = _delayBuffer[index+1, (_counter - _FBDelay + MaxBuffers)] + (float)0.708 * _delayRBbuffer[index+1, (_counter - _FBDelay + MaxBuffers)];
+                   // delayL = _delayBuffer[index, (_counter - _FBDelay + MaxBuffers)] + (float)0.708 * _delayRBbuffer[index, (_counter - _FBDelay + MaxBuffers)];
+                   // delayR = _delayBuffer[index+1, (_counter - _FBDelay + MaxBuffers)] + (float)0.708 * _delayRBbuffer[index+1, (_counter - _FBDelay + MaxBuffers)];
+                    delayL = -(float)0.7 * input[index] + _delayBuffer[index, (_counter - _FBDelay + MaxBuffers)] + (float)0.7 * _delayFBbuffer[index, (_counter - _FBDelay + MaxBuffers)];
+                    delayR = -(float)0.7 * input[index] + _delayBuffer[index, (_counter - _FBDelay + MaxBuffers)] + (float)0.7 * _delayFBbuffer[index, (_counter - _FBDelay + MaxBuffers)];
                 }
                 // y[n] = -gx[n] + x[n - d] + gy[n – d]
                 //All pass filter
@@ -418,7 +422,7 @@ namespace BlueWave.Interop.Asio.Test
 
                 // update the feedback buffer
                 _delayBuffer[index, _counter] = delayL;
-                _delayRBbuffer[index, _counter] = delayR;
+               // _delayRBbuffer[index, _counter] = delayR;
 
                 // write the output buffer with the effect output
                 outputL[index] = delayL;
