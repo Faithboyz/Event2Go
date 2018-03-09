@@ -1,5 +1,6 @@
 'use strict';
 
+
 angular.module('Event2Go.account', ['ngRoute', 'firebase'])
 
 .config(['$routeProvider', function($routeProvider){
@@ -8,16 +9,20 @@ angular.module('Event2Go.account', ['ngRoute', 'firebase'])
 		controller: 'AccountCtrl'
 	});
 }])
-.controller('AccountCtrl', ['$scope', 'CommonProp', '$firebaseArray', '$firebaseObject', '$location', function($scope, CommonProp, $firebaseArray, $firebaseObject, $location){
+.controller('AccountCtrl', ['$scope', 'CommonProp', '$firebaseArray', '$firebaseObject', '$location', function($scope, CommonProp, $firebaseArray, $firebaseObject, $location, $timeout, spinnerService){
 	$scope.username = CommonProp.getUser();
 	$scope.userAccount = {};
 	var ref = firebase.database().ref("Account");
-	var rep = ref.orderByChild("email").equalTo($scope.username).on("child_added", function(snapshot) {
+	ref.orderByChild("email").equalTo($scope.username).on("child_added", function(snapshot) {
 			$scope.userAccount = snapshot.val();
-			console.log(userAccount.name);
+			$scope.$apply(function() {
+			    $scope.userAccount = snapshot.val();
+			    console.log(userAccount.name);
+			  });
 		}, function(error) {
 			  // The Promise was rejected.
 			  console.error(error);});
+
 
 	if(!$scope.username){
 		$location.path('/home');
