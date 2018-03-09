@@ -12,11 +12,13 @@ angular.module('Event2Go.account', ['ngRoute', 'firebase'])
 .controller('AccountCtrl', ['$scope', 'CommonProp', '$firebaseArray', '$firebaseObject', '$location', function($scope, CommonProp, $firebaseArray, $firebaseObject, $location, $timeout, spinnerService){
 	$scope.username = CommonProp.getUser();
 	$scope.userAccount = {};
+	$scope.showLoad = true;
 	var ref = firebase.database().ref("Account");
 	ref.orderByChild("email").equalTo($scope.username).on("child_added", function(snapshot) {
 			$scope.userAccount = snapshot.val();
 			$scope.$apply(function() {
 			    $scope.userAccount = snapshot.val();
+			    $scope.showLoad = false;
 			    console.log(userAccount.name);
 			  });
 		}, function(error) {
