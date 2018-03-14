@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>E2G-SignUp</title>
+</head>
+<body ng-controller="RegisterCtrl">
+<div class="toolbar">
+		<div class="toolbar__left">
+		    <a class="toolbar-button toolbar-button--outline"  href="#!/home">Log In</a>
+		</div>
+		<div class="toolbar__center">Register</div>
+		<div class="toolbar__right"></div>
+	</div>
+<br />
+<div class="col-sm-10 offset-sm-1 text-center">
+	<br /><br />
+	<form role="form" class="form" name="regForm" novalidate="">
+		<div ng-class="{'has-error': regForm.email.$invalid && regForm.email.$touched}">
+			<div><input class="text-input text-input--material" type="email" name="email" ng-model="user.email" placeholder="Email Address" required=""></div>
+			<small class="help-block" ng-show="regForm.email.$invalid && regForm.email.$touched">Please enter an Email Address</small>
+		</div>
+	  	<br />
+
+	  	<div ng-class="{'has-error': regForm.name.$invalid && regForm.name.$touched}">
+		  	<div><input class="text-input text-input--material" name="name" ng-model="user.name" placeholder="Name" type="text" required></div>
+		  	<small class="help-block" ng-show="regForm.name.$invalid && regForm.name.$touched" >Please enter your name</small>
+	  	</div>
+		<br />
+
+		<div ng-class="{'has-error': regForm.password.$invalid && regForm.password.$touched}">
+		  <div><input type="password" name="password" ng-model="user.password" placeholder="Password" class="text-input text-input--material" required></div>
+		  <small class="help-block" ng-show="regForm.password.$touched && regForm.password.$invalid">Password must be atleast 8 characters.</small>
+		</div>
+		<br />
+
+		<div ng-class="{'has-error': regForm.cpassword.$invalid && regForm.cpassword.$touched}">
+		  	<div><input type="password" name="cpassword" ng-model="user.cpassword" placeholder="Confirm Password" class="text-input text-input--material" required></div>
+		  	<small class="help-block" ng-show="regForm.cpassword.$touched && regForm.cpassword.$invalid">
+		  	Please confirm password</small>
+	  	</div>
+	  	<br />
+	  	<br />
+	  	<a type="button"  name="submit" class="button--large--cta"  ng-disabled="regForm.$invalid" ng-click="signUp()">Sign Up</a>
+	</form>
+</div>
+</body>
+</html>

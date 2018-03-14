@@ -1,0 +1,137 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Event 2 Go</title>
+  <link rel="stylesheet" href="css/slideMenu.css"/>
+</head>
+<body ng-controller="WelcomeCtrl">
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#!/welcome">Home</a>
+    <a href="#!/account">Profile</a>
+    <a href="#!/welcome">Events</a>
+    <a href="#" ng-click="logout()">Logout</a>
+  </div>
+  <div class="toolbar">
+    <div class="toolbar__left">
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;
+          </span>
+    </div>
+
+    <div class="toolbar__center">
+      Events
+
+    </div>
+
+    <div class="toolbar__right">
+
+      <!--<span class="toolbar-button toolbar-button--outline">+ Event</span>-->
+      <span class="toolbar-button toolbar-button--outline" ng-click="logout()">Logout</span>
+    
+    </div>
+  </div>
+
+  <div class="tabbar tabbar--top tabbar--top-border">
+    <label class="tabbar__item tabbar--top-border__item">
+      <input type="radio" name="top-tabbar-b" checked="checked">
+      <button class="tabbar__button tabbar--top-border__button">
+        Home
+      </button>
+    </label>
+
+    <label class="tabbar__item tabbar--top-border__item">
+      <input type="radio" name="top-tabbar-b">
+      <button class="tabbar__button tabbar--top-border__button">
+        Comments
+      </button>
+    </label>
+
+    <label class="tabbar__item tabbar--top-border__item">
+      <input type="radio" name="top-tabbar-b">
+      <button class="tabbar__button tabbar--top-border__button">
+        Activity
+      </button>
+    </label>
+  </div>
+
+      <!--<span class="toolbar-button toolbar-button--outline" ng-click="logout()">Logout</span>-->
+  <input type="search" value="" placeholder="Search" class="search-input" style="width: 280px;">
+  <ul class="list list--material">
+    <li class="list-item list-item--material">
+      <div class="list-item__left list-item--material__left">
+        <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/42/41" alt="Cute kitten">
+      </div>
+
+      <div class="list-item__center list-item--material__center">
+        <div class="list-item__title list-item--material__title">Lily</div>
+        <div class="list-item__subtitle list-item--material__subtitle">Very friendly cat</div>
+      </div>
+    </li>
+
+    <li class="list-item list-item--material">
+      <div class="list-item__left list-item--material__left">
+        <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/40/40" alt="Cute kitten">
+      </div>
+
+      <div class="list-item__center list-item--material__center">
+        <div class="list-item__title list-item--material__title">Molly</div>
+        <div class="list-item__subtitle list-item--material__subtitle">Loves tuna!</div>
+      </div>
+    </li>
+  <ul class="list list--material">
+    <li class="list-item list-item--material">
+      <div class="list-item__left list-item--material__left">
+        <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/42/41" alt="Cute kitten">
+      </div>
+
+      <div class="list-item__center list-item--material__center">
+        <div class="list-item__title list-item--material__title">Lily</div>
+        <div class="list-item__subtitle list-item--material__subtitle">Very friendly cat</div>
+      </div>
+    </li>
+
+    <li class="list-item list-item--material">
+      <div class="list-item__left list-item--material__left">
+        <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/40/40" alt="Cute kitten">
+      </div>
+
+      <div class="list-item__center list-item--material__center">
+        <div class="list-item__title list-item--material__title">Molly</div>
+        <div class="list-item__subtitle list-item--material__subtitle">Loves tuna!</div>
+      </div>
+    </li>
+
+  </ul>
+  </ul>
+
+</body>
+</html>
+=======
+<ons-navigator swipeable id="myNavigator" page="/welcome"></ons-navigator>
+
+<template id="/welcome">
+  <ons-page id="welcome">
+    <ons-toolbar>
+      <div class="center">Event</div>
+    </ons-toolbar>
+    <ons-toolbas
+
+    <p>This is the first page.</p>
+
+    <ons-button id="push-button">Push page</ons-button>
+  </ons-page>
+</template>
+
+<template id="/event">
+  <ons-page id="event">
+    <ons-toolbar>
+      <div class="left"><ons-back-button>back</ons-back-button></div>
+      <div class="center"></div>
+      <div class="right"></div>
+    </ons-toolbar>
+
+    <p>This is the second page.</p>
+  </ons-page>
+</template>
+>>>>>>> 5c4f5c2eaf860f79d03e3fa904825907ba00fc0b
