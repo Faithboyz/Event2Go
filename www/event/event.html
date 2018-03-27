@@ -41,13 +41,8 @@
           <small class="help-block" ng-show="eventForm.location.$invalid && eventForm.location.$touched">Please enter an Event location</small>
         </div>
           <br />
-        <div ng-class="{'has-error': eventForm.time.$invalid && eventForm.time.$touched}">
-          <div><input class="text-input text-input--material" type="time" name="time" ng-model="user.time" value="13:30" required=""></div>
-          <small class="help-block" ng-show="eventForm.time.$invalid && eventForm.time.$touched">Please enter an Event time</small>
-        </div>
-          <br />
         <div ng-class="{'has-error': eventForm.date.$invalid && eventForm.date.$touched}">
-          <div><input class="text-input text-input--material" type="date" name="date" ng-model="user.date" placeholder="Email Address" required=""></div>
+          <div><input class="text-input text-input--material" type="datetime-local" name="date" ng-model="user.date" placeholder="Email Address" required=""></div>
           <small class="help-block" ng-show="eventForm.date.$invalid && eventForm.date.$touched">Please enter an Event date</small>
         </div>
           <br />

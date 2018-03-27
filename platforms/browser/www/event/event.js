@@ -10,7 +10,7 @@ angular.module('Event2Go.event', ['ngRoute', 'firebase'])
 }])
 
 .controller('EventCtrl', ['$scope', 'CommonProp', '$firebaseArray', '$firebaseObject', '$location', '$timeout', function($scope, CommonProp, $firebaseArray, $firebaseObject, $location, $timeout){
-	$scope.user = { name: 'EventName',time: 'B',description: 'EventDescription',location: 'EventLocation', date: 'B' };
+	$scope.user = { name: 'EventName',description: 'EventDescription',location: 'EventLocation', date: 'B' };
 	$scope.eventForm = {};
 	$scope.username = CommonProp.getUser();
 	$scope.userEvent = {};
@@ -25,6 +25,7 @@ angular.module('Event2Go.event', ['ngRoute', 'firebase'])
 			$scope.userEvent = snapshot.val();
 			 $timeout(function(){ 
 			    $scope.userEvent = snapshot.val();
+			    console.log($scope.userEvent);
 			    /*var timestamp = data[0].bdatetime;
 				var date = new Date(timestamp * 1000);
 				var datevalues = ('0' + date.getDate()).slice(-2) + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes();
@@ -35,25 +36,15 @@ angular.module('Event2Go.event', ['ngRoute', 'firebase'])
 			  console.error(error);});
 
 	$scope.Create = function(){
-		var eventName = $scope.user.name;
-		var Location = $scope.user.location;
-		var email = $scope.username
-		var description = $scope.user.description;
-		var time = $scope.user.time;
-		console.log($scope.user.time.getTime());
-		console.log("break");
-		var date = $scope.user.date;
-		console.log(date);
-		/*$scope.event.$add({
-			event: eventName,
-			email: email,
-			description: description,
-			Location: Location,
-			time: time,
-			date: date
+		$scope.event.$add({
+			event: $scope.user.name,
+			email: $scope.username,
+			description: $scope.user.description,
+			Location: $scope.user.location,
+			date: $scope.user.date.getTime()
 		}).then(function(add){
 			console.log("Event Created !!");
-		});*/
+		});
 	}
 
 	if(!$scope.username){
