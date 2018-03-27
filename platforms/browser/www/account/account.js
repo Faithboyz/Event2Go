@@ -10,6 +10,8 @@ angular.module('Event2Go.account', ['ngRoute', 'firebase'])
 	});
 }])
 .controller('AccountCtrl', ['$scope', 'CommonProp', '$firebaseArray', '$firebaseObject', '$location', '$timeout', function($scope, CommonProp, $firebaseArray, $firebaseObject, $location, $timeout){
+	$scope.user = { name: 'B',age: 'B',description: 'B',location: 'B' };
+	$scope.updateForm = {};
 	$scope.username = CommonProp.getUser();
 	$scope.userAccount = {};
 	$scope.location = "Toronto, ON";
@@ -39,10 +41,48 @@ angular.module('Event2Go.account', ['ngRoute', 'firebase'])
 	$scope.Cancel = function(id){
 		$scope.showLoad = false;$scope.showData = true;$scope.showEdit = false;
 	};
-	$scope.Update = function(id){
+	$scope.Update = function(){
+		if ($scope.user.name != 'B'){
+			var name = $scope.user.name;
+		}
+		else{
+			var name = $scope.userAccount.name;
+		}
+
+		if ($scope.user.age != 'B'){
+			var age = $scope.user.age;
+		}
+		else{
+			var age = $scope.userAccount.age;
+		}
+		
+		if ($scope.user.description != 'B'){
+			var description = $scope.user.description;
+		}
+		else{
+			var description = $scope.userAccount.description;
+		}
+		
+		if ($scope.user.location != 'B'){
+			var location = $scope.user.location;
+		}
+		else{
+			var location = $scope.location;
+		}
+		var ref = firebase.database().ref().child('Account/' + $scope.ID);
+		ref.update({
+			age: age,
+			description: description,
+			email: $scope.username,
+			name: name,
+			picture: 'default.jpg',
+			location: location
+		}).then(function(ref){
+		}, function(error){
+			console.log(error);
+		});
 		$scope.showLoad = false;$scope.showData = true;$scope.showEdit = false;
 	};
-
 	if(!$scope.username){
 		$location.path('/home');
 	}
