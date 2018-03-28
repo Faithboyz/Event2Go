@@ -57,55 +57,26 @@
   </div>
 
       <!--<span class="toolbar-button toolbar-button--outline" ng-click="logout()">Logout</span>-->
-  <input type="search" value="" placeholder="Search" class="search-input" style="width: 280px;">
-  <ul class="list list--material">
-    <li class="list-item list-item--material">
-      <div class="list-item__left list-item--material__left">
-        <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/42/41" alt="Cute kitten">
-      </div>
-
-      <div class="list-item__center list-item--material__center">
-        <div class="list-item__title list-item--material__title">Lily</div>
-        <div class="list-item__subtitle list-item--material__subtitle">Very friendly cat</div>
-      </div>
-    </li>
-
-    <li class="list-item list-item--material">
-      <div class="list-item__left list-item--material__left">
-        <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/40/40" alt="Cute kitten">
-      </div>
-
-      <div class="list-item__center list-item--material__center">
-        <div class="list-item__title list-item--material__title">Molly</div>
-        <div class="list-item__subtitle list-item--material__subtitle">Loves tuna!</div>
-      </div>
-    </li>
-  <ul class="list list--material">
-    <li class="list-item list-item--material">
-      <div class="list-item__left list-item--material__left">
-        <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/42/41" alt="Cute kitten">
-      </div>
-
-      <div class="list-item__center list-item--material__center">
-        <div class="list-item__title list-item--material__title">Lily</div>
-        <div class="list-item__subtitle list-item--material__subtitle">Very friendly cat</div>
-      </div>
-    </li>
-
-    <li class="list-item list-item--material">
-      <div class="list-item__left list-item--material__left">
-        <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/40/40" alt="Cute kitten">
-      </div>
-
-      <div class="list-item__center list-item--material__center">
-        <div class="list-item__title list-item--material__title">Molly</div>
-        <div class="list-item__subtitle list-item--material__subtitle">Loves tuna!</div>
-      </div>
-    </li>
-
-  </ul>
-  </ul>
-
+  <input type="search" value="" placeholder="Search" class="search-input" style="width: 100%;">
+  
+  <div ng-repeat="event in events">
+    <div ng-if="event.email!=username" >
+    <div class="col-md-12 well well-sm">
+      <h4>{{event.event}}</h4>
+      <p>{{event.description}}</p>
+      <p>{{event.Location}}</p>
+      <p>{{event.date}}</p>
+      <button type="submit" class="btn btn-sm btn-primary" ng-click="JoinPost(event.$id)" data-target="#JoinModal" data-toggle="modal">Join Event</button><br/>
+    </div>
+  </div>
+  <br/>
+</div>
+<div class="panel panel-success" >
+    <div class="panel-body">
+    Panel content
+  </div>
+  <div class="panel-footer">Panel footer</div>
+</div>
 </body>
 </html>
 

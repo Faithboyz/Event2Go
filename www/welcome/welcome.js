@@ -8,24 +8,36 @@ angular.module('Event2Go.welcome', ['ngRoute', 'firebase'])
 		controller: 'WelcomeCtrl'
 	});
 }])
-.controller('WelcomeCtrl', ['$scope', 'CommonProp', '$firebaseArray', '$firebaseObject', '$location', function($scope, CommonProp, $firebaseArray, $firebaseObject, $location){
+.controller('WelcomeCtrl', ['$scope', 'CommonProp', '$firebaseArray', '$firebaseObject', '$location','$timeout', function($scope, CommonProp, $firebaseArray, $firebaseObject, $location,$timeout){
 	$scope.username = CommonProp.getUser();
 
 	if(!$scope.username){
 		$location.path('/home');
 	}
-	
+	var rev = firebase.database().ref("Event");
+	rev.orderByChild("email").equalTo($scope.username).on("child_added", function(snapshot) {
+			 $timeout(function(){ 
+			    $scope.userEvent = snapshot.val();
+			    console.log($scope.userEvent);
+			    /*var timestamp = data[0].bdatetime;
+				var date = new Date(timestamp * 1000);
+				var datevalues = ('0' + date.getDate()).slice(-2) + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes();
+				$scope.bdatetime = datevalues;*/
+			  });
+		}, function(error) {
+			  // The Promise was rejected.
+			  console.error(error);});
 
-	var ref = firebase.database().ref().child('Articles');
-	$scope.articles = $firebaseArray(ref);	
+	var list = firebase.database().ref().child('Event');
+	$scope.events = $firebaseArray(list);
 
 	$scope.editEvent = function(id){
-		var ref = firebase.database().ref().child('Articles/' + id);
+		var ref = firebase.database().ref().child('Event/' + id);
 		$scope.editPostData = $firebaseObject(ref);
 	};
 
 	$scope.updateEvent = function(id){
-		var ref = firebase.database().ref().child('Articles/' + id);
+		var ref = firebase.database().ref().child('Event/' + id);
 		ref.update({
 			title: $scope.editPostData.title,
 			post: $scope.editPostData.post

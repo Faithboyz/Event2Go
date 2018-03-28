@@ -10,19 +10,20 @@ angular.module('Event2Go.event', ['ngRoute', 'firebase'])
 }])
 
 .controller('EventCtrl', ['$scope', 'CommonProp', '$firebaseArray', '$firebaseObject', '$location', '$timeout', function($scope, CommonProp, $firebaseArray, $firebaseObject, $location, $timeout){
-	$scope.user = { name: 'EventName',description: 'EventDescription',location: 'EventLocation', date: 'B' };
+	$scope.user = { name: 'EventName',description: 'EventDescription',location: 'EventLocation', date: 1522206895 };
 	$scope.eventForm = {};
 	$scope.username = CommonProp.getUser();
 	$scope.userEvent = {};
-	$scope.showCreate = true;
+	$scope.showCreate = false;
+	$scope.showList = true;
 	$scope.current = Date.now();
 
 	var add = firebase.database().ref().child('Event');
-	$scope.event = $firebaseArray(add);
+	$scope.events = $firebaseArray(add);
+
 
 	var ref = firebase.database().ref("Event");
 	ref.orderByChild("email").equalTo($scope.username).on("child_added", function(snapshot) {
-			$scope.userEvent = snapshot.val();
 			 $timeout(function(){ 
 			    $scope.userEvent = snapshot.val();
 			    console.log($scope.userEvent);
@@ -35,6 +36,7 @@ angular.module('Event2Go.event', ['ngRoute', 'firebase'])
 			  // The Promise was rejected.
 			  console.error(error);});
 
+
 	$scope.Create = function(){
 		$scope.event.$add({
 			event: $scope.user.name,
@@ -44,7 +46,16 @@ angular.module('Event2Go.event', ['ngRoute', 'firebase'])
 			date: $scope.user.date.getTime()
 		}).then(function(add){
 			console.log("Event Created !!");
+			$scope.showCreate = false;$scope.showList = true;
 		});
+	}
+
+	$scope.Createform = function(){
+		$scope.showCreate = true;$scope.showList = false;
+	}
+
+	$scope.Cancel = function(){
+		$scope.showCreate = false;$scope.showList = true;
 	}
 
 	if(!$scope.username){
