@@ -58,25 +58,29 @@
 
       <!--<span class="toolbar-button toolbar-button--outline" ng-click="logout()">Logout</span>-->
   <input type="search" value="" placeholder="Search" class="search-input" style="width: 100%;">
-  
-  <div ng-repeat="event in events">
-    <div ng-if="event.email!=username" >
-    <div class="col-md-12 well well-sm">
-      <h4>{{event.event}}</h4>
-      <p>{{event.description}}</p>
-      <p>{{event.Location}}</p>
-      <p>{{event.date}}</p>
-      <button type="submit" class="btn btn-sm btn-primary" ng-click="JoinPost(event.$id)" data-target="#JoinModal" data-toggle="modal">Join Event</button><br/>
+  <div ng-if="showLoad">
+    <div class="spinner">
+      <div class="rect1"></div>
+      <div class="rect2"></div>
+      <div class="rect3"></div>
+      <div class="rect4"></div>
+      <div class="rect5"></div>
     </div>
   </div>
-  <br/>
-</div>
-<div class="panel panel-success" >
-    <div class="panel-body">
-    Panel content
+  <div ng-if="showData">
+    <div ng-repeat="event in events">
+      <div ng-if="event.email!=username" >
+        <div class="col-md-12 well well-sm" class="card" style="width: 100%;background-color: #fff;background-size: cover;">
+          <h4>{{event.event}}</h4>
+          <p>{{event.description}}</p>
+          <p>{{event.Location}}</p>
+          <p>{{event.date}}</p>
+          <button type="submit" class="btn btn-sm btn-primary" ng-click="JoinPost(event.$id)" data-target="#JoinModal" data-toggle="modal">Join Event</button><br/>
+        </div>
+      </div>
+    <br/>
+    </div>
   </div>
-  <div class="panel-footer">Panel footer</div>
-</div>
 </body>
 </html>
 

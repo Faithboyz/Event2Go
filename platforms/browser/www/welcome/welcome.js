@@ -10,6 +10,8 @@ angular.module('Event2Go.welcome', ['ngRoute', 'firebase'])
 }])
 .controller('WelcomeCtrl', ['$scope', 'CommonProp', '$firebaseArray', '$firebaseObject', '$location','$timeout', function($scope, CommonProp, $firebaseArray, $firebaseObject, $location,$timeout){
 	$scope.username = CommonProp.getUser();
+	$scope.showLoad = true;
+	$scope.showData = false;
 
 	if(!$scope.username){
 		$location.path('/home');
@@ -18,11 +20,7 @@ angular.module('Event2Go.welcome', ['ngRoute', 'firebase'])
 	rev.orderByChild("email").equalTo($scope.username).on("child_added", function(snapshot) {
 			 $timeout(function(){ 
 			    $scope.userEvent = snapshot.val();
-			    console.log($scope.userEvent);
-			    /*var timestamp = data[0].bdatetime;
-				var date = new Date(timestamp * 1000);
-				var datevalues = ('0' + date.getDate()).slice(-2) + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes();
-				$scope.bdatetime = datevalues;*/
+			    $scope.showLoad = false;$scope.showData = true;
 			  });
 		}, function(error) {
 			  // The Promise was rejected.
