@@ -56,22 +56,22 @@
       <br /><br />
       <form role="form" class="form" name="eventForm" novalidate="">
         <div ng-class="{'has-error': eventForm.name.$invalid && eventForm.name.$touched}">
-          <div><p><b>Enter Event details : </b></p><input class="text-input text-input--material" type="name" name="name" ng-model="user.name" placeholder="Email Address" required=""></div>
+          <div><input class="text-input text-input--material" type="name" name="name" ng-model="user.name" placeholder="Event Name" required=""></div>
           <small class="help-block" ng-show="eventForm.name.$invalid && eventForm.name.$touched">Please enter an Event name</small>
         </div>
           <br />
         <div ng-class="{'has-error': eventForm.location.$invalid && eventForm.location.$touched}">
-          <div><input class="text-input text-input--material" type="text" name="location" ng-model="user.location" placeholder="Email Address" required=""></div>
+          <div><input class="text-input text-input--material" type="text" name="location" ng-model="user.location" placeholder="Event Location" required=""></div>
           <small class="help-block" ng-show="eventForm.location.$invalid && eventForm.location.$touched">Please enter an Event location</small>
         </div>
           <br />
         <div ng-class="{'has-error': eventForm.date.$invalid && eventForm.date.$touched}">
-          <div><input class="text-input text-input--material" type="datetime-local" name="date" ng-model="user.date" placeholder="Email Address" required=""></div>
+          <div><input class="text-input text-input--material" type="datetime-local" name="date" ng-model="user.date" placeholder="Event Date" required=""></div>
           <small class="help-block" ng-show="eventForm.date.$invalid && eventForm.date.$touched">Please enter an Event date</small>
         </div>
           <br />
         <div ng-class="{'has-error': eventForm.description.$invalid && eventForm.description.$touched}">
-          <div><input class="text-input text-input--material" type="text" name="description" ng-model="user.description" placeholder="Email Address" required=""></div>
+          <div><input class="text-input text-input--material" type="text" name="description" ng-model="user.description" placeholder="Event description" required=""></div>
           <small class="help-block" ng-show="eventForm.description.$invalid && eventForm.description.$touched">Please enter an Event description</small>
         </div>
           <br />
@@ -79,6 +79,37 @@
           <a type="button"  name="cancel" class="button--large--cta"  ng-click="Cancel()">Cancel</a><br />
           <br />
           <a type="button"  name="submit" class="button--large--cta"  ng-disabled="eventForm.$invalid" ng-click="Create()">Create</a>
+      </form>
+    </div>
+  </div>
+  <div ng-if="showEdit">
+    <div class="col-sm-10 offset-sm-1 text-center">
+      <br /><br />
+      <form role="form" class="form" name="editForm" novalidate="">
+        <div ng-class="{'has-error': editForm.name.$invalid && editForm.name.$touched}">
+          <div><input class="text-input text-input--material" type="name" name="name" ng-model="edits.event" placeholder="Event Name" required=""></div>
+          <small class="help-block" ng-show="editForm.name.$invalid && editForm.name.$touched">Please enter an Event name</small>
+        </div>
+          <br />
+        <div ng-class="{'has-error': editForm.location.$invalid && editForm.location.$touched}">
+          <div><input class="text-input text-input--material" type="text" name="location" ng-model="edits.Location" placeholder="Event Location" required=""></div>
+          <small class="help-block" ng-show="editForm.location.$invalid && editForm.location.$touched">Please enter an Event location</small>
+        </div>
+          <br />
+        <div ng-class="{'has-error': editForm.date.$invalid && editForm.date.$touched}">
+          <div><input class="text-input text-input--material" type="datetime-local" name="date" ng-model="edits.date" placeholder="Event Date" required=""></div>
+          <small class="help-block" ng-show="editForm.date.$invalid && editForm.date.$touched">Please enter an Event date</small>
+        </div>
+          <br />
+        <div ng-class="{'has-error': editForm.description.$invalid && editForm.description.$touched}">
+          <div><input class="text-input text-input--material" type="text" name="description" ng-model="edits.description" placeholder="Event description" required=""></div>
+          <small class="help-block" ng-show="editForm.description.$invalid && editForm.description.$touched">Please enter an Event description</small>
+        </div>
+          <br />
+          <br />
+          <a type="button"  name="cancel" class="button--large--cta"  ng-click="Cancel()">Cancel</a><br />
+          <br />
+          <a type="button"  name="submit" class="button--large--cta"  ng-disabled="editForm.$invalid" ng-click="Update()">Update</a>
       </form>
     </div>
   </div>
