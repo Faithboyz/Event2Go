@@ -24,16 +24,19 @@ angular.module('Event2Go.home', ['ngRoute', 'firebase'])
 		var auth = $firebaseAuth();
 
 		auth.$signInWithEmailAndPassword(username, password).then(function(){
-			ons.notification.alert("User Login Successful");
-			console.log("User Login Succesfully");
+
 			CommonProp.setUser($scope.user.email);
 			var user  = firebase.auth().currentUser;
 			if(user.emailVerified){
-				$location.path('/welcome');}
+				$location.path('/welcome');
+				ons.notification.alert("User Login Successful");
+				console.log("User Login Succesfully");
+		}
 			else{
 				ons.notification.alert("Email not verified");
 				CommonProp.logoutUser();
 			}
+
 			
 		}).catch(function(error){
 			$scope.errMsg = true;
@@ -67,7 +70,10 @@ angular.module('Event2Go.home', ['ngRoute', 'firebase'])
 			user = "";
 			localStorage.removeItem('userEmail');
 			$location.path('/home');
-			ons.notification.alert('Logged Out Succesfully');  
+
+			if(user.emailVerified){
+			ons.notification.alert('Logged Out Succesfully'); 
+			 }
 		}
 	};
 }]);
