@@ -36,25 +36,18 @@
       <div class="rect5"></div>
     </div>
   </div>
+  
   <div ng-if="showData">
-    <div class="col-sm-10 offset-sm-1 text-center" >
-      <div class="row col-sm-10 offset-sm-1 text-center" >
-        <div class="col-sm-10 offset-sm-1 text-center">
-            <img src="img/default.jpg" alt="" class="img-rounded img-responsive" />
-        </div><br/>
-        <div class="col-sm-10 offset-sm-1 text-center">
-          <br />
-          <h4><pre>{{userAccount.name| json }}</pre></h4>
-          <small><cite title="San Francisco, USA">{{location}}<i class="glyphicon glyphicon-map-marker">
-          </i></cite></small>
-          <p>
-            <i class="glyphicon glyphicon-envelope"></i><pre>{{userAccount.email| json }}</pre>
-            <br />
-            <i class="glyphicon glyphicon-globe"></i><pre>{{userAccount.age| json }}</pre>
-            <i class="glyphicon glyphicon-gift"></i><pre>{{userAccount.description| json }}</pre></p>
-        </div>
-      </div>
+    <div style="height: 200px; padding: 1px 0 0 0;">
+      <div class="card" >
+        <h2 class="card__title"><pre>{{userAccount.name| json }}</pre></h2>
+        <div class="card__content"><img src="img/default.jpg" alt="" class="img-rounded img-responsive" /></div>
+        <div class="card__content">{{location}}</div>
+        <div class="card__content"><pre>{{userAccount.email| json }}</pre></div>
+        <div class="card__content"><pre>{{userAccount.age| json }}</pre></div>
+        <div class="card__content"><pre>{{userAccount.description| json }}</pre></div>
     </div>
+  </div>
   </div>
   <div ng-if="showEdit">
     <div class="col-sm-10 offset-sm-1 text-center">

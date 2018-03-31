@@ -13,6 +13,7 @@ angular.module('Event2Go.event', ['ngRoute', 'firebase'])
 	$scope.user = { event: 'Event Name',description: 'Event Description',Location: 'Event Location', date: 1522206895 };
 	$scope.eventForm = {};
 	$scope.edit = { event: 'Event Name',description: 'Event Description',Location: 'Event Location', date: 1522206895 };
+	$scope.editForm = {};
 	$scope.username = CommonProp.getUser();
 	$scope.userEvent = {};
 	$scope.showCreate = false;$scope.showList = false;$scope.showLoad = true;$scope.showEdit = false;
@@ -45,16 +46,50 @@ angular.module('Event2Go.event', ['ngRoute', 'firebase'])
 			Location: $scope.user.Location,
 			date: $scope.user.date.getTime()
 		}).then(function(add){
-			console.log("Event create Successful");
-			ons.notification.alert("Event create Successful");
+			console.log("Event Created !!");
 			$scope.showCreate = false;$scope.showList = true;$scope.showLoad = false;$scope.showEdit = false;
 		});
 	}
 
-	
+	$scope.Update = function(id){
+		var ref = firebase.database().ref().child('Event/' + id);
+		if($scope.editPostData.event!=null && $scope.editPostData.date!=null && $scope.editPostData.description!=null && $scope.editPostData.Location!=null)
+		{
+			ref.update({
+				event: $scope.editPostData.event,
+				email: $scope.username,
+				description: $scope.editPostData.description,
+				Location: $scope.editPostData.Location,
+				date: $scope.editPostData.date.getTime()
+			}).then(function(ref){
+			}, function(error){
+				console.log(error);
+			});
+			$scope.showCreate = false;$scope.showList = true;$scope.showLoad = false;$scope.showEdit = false;
+		}
+		else{
+			console.log("Error with event update!!");
+		}
+	}
+
 	$scope.Createform = function(){
 		$scope.showCreate = true;$scope.showList = false;$scope.showLoad = false;$scope.showEdit = false;
-
+	}
+	$scope.editEvent = function(id){
+		var ref = firebase.database().ref().child('Event/' + id);
+		$scope.editPostData = $firebaseObject(ref);
+		$scope.showCreate = false;$scope.showList = false;$scope.showLoad = false;$scope.showEdit = true;	
+	}
+	$scope.deleteEvent = function(id){
+		$scope.showCreate = false;$scope.showList = false;$scope.showLoad = true;$scope.showEdit = false;
+		var ref = firebase.database().ref().child('Event/' + id);
+		$timeout(function(){
+			ref.remove();
+			console.log("Value deleted");
+			var reload = firebase.database().ref().child('Event');
+			$scope.events = $firebaseArray(reload);
+			$scope.showCreate = false;$scope.showList = true;$scope.showLoad = false;$scope.showEdit = false;
+		});
 	}
 	$scope.Cancel = function(){
 		$scope.showCreate = false;$scope.showList = true;$scope.showEdit = false;$scope.showLoad = false;	

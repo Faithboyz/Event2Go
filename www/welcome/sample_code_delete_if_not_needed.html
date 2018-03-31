@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WebApp Home Page</title>
+</head>
+<body ng-controller="WelcomeCtrl">
+ <!--http://www.c-sharpcorner.com/article/developing-login-page-in-onsen-ui-using-visual-studio-2015/-->
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a href="#" class="navbar-brand">WebApp</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#/welcome">Home</a></li>
+      <li><a href="#/addPost">Add Post</a></li>
+      <li ng-click="logout()"><a href="#">Logout</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Welcome Home {{username}} !</h3>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row" ng-repeat="article in articles">
+    <div class="col-md-12 well well-sm">
+      <h4>{{article.title}}</h4>
+      <p>{{article.post}}</p>
+      <button type="submit" class="btn btn-sm btn-primary" ng-click="editPost(article.$id)" data-target="#editModal" data-toggle="modal">Edit</button>
+      <button type="submit" class="btn btn-sm btn-danger" ng-click="deleteCnf(article)" data-target="#deleteModal" data-toggle="modal">Delete</button>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div id="editModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4>Edit Post Details</h4>
+        </div>
+        <div class="modal-body">
+          <form role="form">
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input type="text" name="title" class="form-control" ng-model="editPostData.title" />
+            </div>
+            <div class="form-group">
+              <label for="post">Post</label>
+              <textarea name="post" class="form-control" ng-model="editPostData.post"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-sm btn-primary" ng-click="updatePost(editPostData.$id)">Update Post</button>
+          <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div id="deleteModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header"></div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete the post?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-sm btn-danger" ng-click="deletePost(deleteArticle)">Delete</button>
+          <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+
+<!-- b o o t s t r a p    t a b-->
+
+<html >
+<head>
+  <title>Event 2 Go</title>
+  <link rel="stylesheet" href="css/slideMenu.css"/>
+</head>
+<body ng-controller="WelcomeCtrl">
+   <ul class="nav md-pills nav-justified pills-secondary">
+    <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#panel4" role="tab">Active</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#panel11" role="tab">Link</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#panel12" role="tab">Link</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#panel13" role="tab">Help</a>
+    </li>
+</ul>
+
+<!-- Tab panels -->
+<div class="tab-content">
+
+    <!--Panel 1-->
+    <div class="tab-pane fade in show active" id="panel11" role="tabpanel">
+        <div class="toolbar">
+      <div class="toolbar__left">
+          <!-- <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;
+            </span> -->
+          <span class="toolbar-button toolbar-button--outline" ng-click="">+ Event</span>  
+      </div>
+
+      <div class="toolbar__center">
+        Events
+
+      </div>
+
+      <div class="toolbar__right">
+
+        <!--<span class="toolbar-button toolbar-button--outline">+ Event</span>-->
+        <span class="toolbar-button toolbar-button--outline" ng-click="logout()">Logout</span>
+      
+      </div>
+    </div>
+
+    <div class="tabbar tabbar--top tabbar--top-border">
+      <label class="tabbar__item tabbar--top-border__item">
+        <input type="radio" name="top-tabbar-b" checked="checked">
+        <button class="tabbar__button tabbar--top-border__button">
+          Home
+        </button>
+      </label>
+
+      <label class="tabbar__item tabbar--top-border__item">
+        <input type="radio" name="top-tabbar-b">
+        <button class="tabbar__button tabbar--top-border__button">
+          Comments
+        </button>
+      </label>
+
+      <label class="tabbar__item tabbar--top-border__item">
+        <input type="radio" name="top-tabbar-b">
+        <button class="tabbar__button tabbar--top-border__button">
+          Activity
+        </button>
+      </label>
+    </div>
+
+        <!--<span class="toolbar-button toolbar-button--outline" ng-click="logout()">Logout</span>-->
+    <input type="search" value="" placeholder="Search" class="search-input" style="width: 280px;">
+    <ul class="list list--material">
+      <li class="list-item list-item--material">
+        <div class="list-item__left list-item--material__left">
+          <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/42/41" alt="Cute kitten">
+        </div>
+
+        <div class="list-item__center list-item--material__center">
+          <div class="list-item__title list-item--material__title">Lily</div>
+          <div class="list-item__subtitle list-item--material__subtitle">Very friendly cat</div>
+        </div>
+      </li>
+
+      <li class="list-item list-item--material">
+        <div class="list-item__left list-item--material__left">
+          <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/40/40" alt="Cute kitten">
+        </div>
+
+        <div class="list-item__center list-item--material__center">
+          <div class="list-item__title list-item--material__title">Molly</div>
+          <div class="list-item__subtitle list-item--material__subtitle">Loves tuna!</div>
+        </div>
+      </li>
+    <ul class="list list--material">
+      <li class="list-item list-item--material">
+        <div class="list-item__left list-item--material__left">
+          <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/42/41" alt="Cute kitten">
+        </div>
+
+        <div class="list-item__center list-item--material__center">
+          <div class="list-item__title list-item--material__title">Lily</div>
+          <div class="list-item__subtitle list-item--material__subtitle">Very friendly cat</div>
+        </div>
+      </li>
+
+      <li class="list-item list-item--material">
+        <div class="list-item__left list-item--material__left">
+          <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/40/40" alt="Cute kitten">
+        </div>
+
+        <div class="list-item__center list-item--material__center">
+          <div class="list-item__title list-item--material__title">Molly</div>
+          <div class="list-item__subtitle list-item--material__subtitle">Loves tuna!</div>
+        </div>
+      </li>
+
+      </ul>
+      </ul>
+      <div class="tabbar tabbar--top tabbar--material">
+        <label class="tabbar__item tabbar--material__item">
+          <input type="radio" name="tabbar-material-b" checked="checked">
+          <button class="tabbar__button tabbar--material__button">
+            <i class="tabbar__icon tabbar--material__icon zmdi zmdi-phone"></i>
+          </button>
+        </label>
+
+        <label class="tabbar__item tabbar--material__item">
+          <input type="radio" name="tabbar-material-b">
+          <button class="tabbar__button tabbar--material__button">
+            <i class="tabbar__icon tabbar--material__icon zmdi zmdi-favorite"></i>
+          </button>
+        </label>
+
+        <label class="tabbar__item tabbar--material__item">
+          <input type="radio" name="tabbar-material-b">
+          <button class="tabbar__button tabbar--material__button">
+            <i class="tabbar__icon tabbar--material__icon zmdi zmdi-pin-account"></i>
+          </button>
+        </label>
+      </div>
+    </div>
+    <!--/.Panel 1-->
+
+    <!--Panel 2-->
+    <div class="tab-pane fade" id="panel12" role="tabpanel">
+        <br>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus
+            reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione
+            porro voluptate odit minima.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus
+            reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione
+            porro voluptate odit minima.</p>
+
+    </div>
+    <!--/.Panel 2-->
+
+    <!--Panel 3-->
+    <div class="tab-pane fade" id="panel13" role="tabpanel">
+      <div class="toolbar">
+      <div class="toolbar__left">
+          <span class="toolbar-button toolbar-button--outline" ng-click="">Edit</span>
+      </div>
+
+      <div class="toolbar__center">
+        User Profile
+      </div>
+
+      <div class="toolbar__right">
+        <span class="toolbar-button toolbar-button--outline" ng-click="logout()">Logout</span>
+      </div>
+      </div>
+      <br />
+
+      <ons-card>
+        <div class="col-sm-10 offset-sm-1 text-center" >
+          <div class="row col-sm-10 offset-sm-1 text-center" >
+            <div class="col-sm-10 offset-sm-1 text-center">
+                <img src="img/default.jpg" alt="" class="img-rounded img-responsive" />
+            </div><br/>
+            <div class="col-sm-10 offset-sm-1 text-center">
+                <h4><pre>{{userAccount.name| json }}</pre></h4>
+                <small><cite title="San Francisco, USA">San Francisco, USA <i class="glyphicon glyphicon-map-marker">
+                </i></cite></small>
+                <p>
+                  <i class="glyphicon glyphicon-envelope"></i>{{username}}
+                  <br />
+                  <i class="glyphicon glyphicon-globe"></i><pre>{{userAccount.age| json }}</pre>
+                  <br />
+                  <i class="glyphicon glyphicon-gift"></i><pre>{{userAccount.description| json }}</pre></p>
+            </div>
+          </div>
+        </div>
+      </ons-card>
+    </div>
+    <!--/.Panel 3-->
+
+    <!--Panel 4-->
+    <div class="tab-pane fade" id="panel14" role="tabpanel">
+        <br>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus
+            reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione
+            porro voluptate odit minima.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus
+            reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione
+            porro voluptate odit minima.</p>
+
+    </div>
+    <!--/.Panel 4-->
+
+</div>
+
+</body>
+</html>
+
+
+<!-- o n s e n   t a b -->
+
+<html >
+<head>
+  <title>Event 2 Go</title>
+  <link rel="stylesheet" href="css/slideMenu.css"/>
+</head>
+<body ng-controller="WelcomeCtrl">
+<ons-page >
+  <ons-tabbar swipeable position="auto">
+    <ons-tab page="tab1"  label="Home" icon="ion-home, material:md-home"  active>
+    </ons-tab>
+    <ons-tab page="tab2" label="Profile" icon="md-face" active-icon="md-face">
+    </ons-tab>
+    <ons-tab page="tab3" label="Settings" icon="md-settings" >
+    </ons-tab>
+  </ons-tabbar>
+</ons-page>
+<template id="tab1" >
+  <ons-page id="Tab1" >
+<!--  <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="#!/welcome">Home</a>
+      <a href="#!/account">Profile</a>
+      <a href="#!/welcome">Events</a>
+      <a href="#!/welcome">Settings</a>
+    </div> -->
+    <div class="toolbar">
+      <div class="toolbar__left">
+          <!-- <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;
+            </span> -->
+          <span class="toolbar-button toolbar-button--outline" ng-click="">+ Event</span>  
+      </div>
+
+      <div class="toolbar__center">
+        Events
+
+      </div>
+
+      <div class="toolbar__right">
+
+        <!--<span class="toolbar-button toolbar-button--outline">+ Event</span>-->
+        <span class="toolbar-button toolbar-button--outline" ng-click="logout()">Logout</span>
+      
+      </div>
+    </div>
+
+    <div class="tabbar tabbar--top tabbar--top-border">
+      <label class="tabbar__item tabbar--top-border__item">
+        <input type="radio" name="top-tabbar-b" checked="checked">
+        <button class="tabbar__button tabbar--top-border__button">
+          Home
+        </button>
+      </label>
+
+      <label class="tabbar__item tabbar--top-border__item">
+        <input type="radio" name="top-tabbar-b">
+        <button class="tabbar__button tabbar--top-border__button">
+          Comments
+        </button>
+      </label>
+
+      <label class="tabbar__item tabbar--top-border__item">
+        <input type="radio" name="top-tabbar-b">
+        <button class="tabbar__button tabbar--top-border__button">
+          Activity
+        </button>
+      </label>
+    </div>
+
+        <!--<span class="toolbar-button toolbar-button--outline" ng-click="logout()">Logout</span>-->
+    <input type="search" value="" placeholder="Search" class="search-input" style="width: 280px;">
+    <ul class="list list--material">
+      <li class="list-item list-item--material">
+        <div class="list-item__left list-item--material__left">
+          <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/42/41" alt="Cute kitten">
+        </div>
+
+        <div class="list-item__center list-item--material__center">
+          <div class="list-item__title list-item--material__title">Lily</div>
+          <div class="list-item__subtitle list-item--material__subtitle">Very friendly cat</div>
+        </div>
+      </li>
+
+      <li class="list-item list-item--material">
+        <div class="list-item__left list-item--material__left">
+          <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/40/40" alt="Cute kitten">
+        </div>
+
+        <div class="list-item__center list-item--material__center">
+          <div class="list-item__title list-item--material__title">Molly</div>
+          <div class="list-item__subtitle list-item--material__subtitle">Loves tuna!</div>
+        </div>
+      </li>
+    <ul class="list list--material">
+      <li class="list-item list-item--material">
+        <div class="list-item__left list-item--material__left">
+          <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/42/41" alt="Cute kitten">
+        </div>
+
+        <div class="list-item__center list-item--material__center">
+          <div class="list-item__title list-item--material__title">Lily</div>
+          <div class="list-item__subtitle list-item--material__subtitle">Very friendly cat</div>
+        </div>
+      </li>
+
+      <li class="list-item list-item--material">
+        <div class="list-item__left list-item--material__left">
+          <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/40/40" alt="Cute kitten">
+        </div>
+
+        <div class="list-item__center list-item--material__center">
+          <div class="list-item__title list-item--material__title">Molly</div>
+          <div class="list-item__subtitle list-item--material__subtitle">Loves tuna!</div>
+        </div>
+      </li>
+
+      </ul>
+      </ul>
+      <div class="tabbar tabbar--top tabbar--material">
+        <label class="tabbar__item tabbar--material__item">
+          <input type="radio" name="tabbar-material-b" checked="checked">
+          <button class="tabbar__button tabbar--material__button">
+            <i class="tabbar__icon tabbar--material__icon zmdi zmdi-phone"></i>
+          </button>
+        </label>
+
+        <label class="tabbar__item tabbar--material__item">
+          <input type="radio" name="tabbar-material-b">
+          <button class="tabbar__button tabbar--material__button">
+            <i class="tabbar__icon tabbar--material__icon zmdi zmdi-favorite"></i>
+          </button>
+        </label>
+
+        <label class="tabbar__item tabbar--material__item">
+          <input type="radio" name="tabbar-material-b">
+          <button class="tabbar__button tabbar--material__button">
+            <i class="tabbar__icon tabbar--material__icon zmdi zmdi-pin-account"></i>
+          </button>
+        </label>
+      </div>
+    </ons-page>
+  </template>
+
+  <template id="tab2">
+    <ons-page id="Tab2">
+      <div class="toolbar">
+        <div class="toolbar__left">
+            <span class="toolbar-button toolbar-button--outline" ng-click="">Edit</span>
+        </div>
+
+        <div class="toolbar__center">
+          User Profile
+        </div>
+
+        <div class="toolbar__right">
+          <span class="toolbar-button toolbar-button--outline" ng-click="logout()">Logout</span>
+        </div>
+      </div>
+      <br />
+
+
+      <ons-card>
+        <div class="col-sm-10 offset-sm-1 text-center" >
+          <div class="row col-sm-10 offset-sm-1 text-center" >
+            <div class="col-sm-10 offset-sm-1 text-center">
+                <img src="img/default.jpg" alt="" class="img-rounded img-responsive" />
+            </div><br/>
+            <div class="col-sm-10 offset-sm-1 text-center">
+                <h4><pre>{{userAccount.name| json }}</pre></h4>
+                <small><cite title="San Francisco, USA">San Francisco, USA <i class="glyphicon glyphicon-map-marker">
+                </i></cite></small>
+                <p>
+                  <i class="glyphicon glyphicon-envelope"></i>{{username}}
+                  <br />
+                  <i class="glyphicon glyphicon-globe"></i><pre>{{userAccount.age| json }}</pre>
+                  <br />
+                  <i class="glyphicon glyphicon-gift"></i><pre>{{userAccount.description| json }}</pre></p>
+            </div>
+          </div>
+        </div>
+      </ons-card>
+    </ons-page>
+  </template>
+
+  <template id="tab3">
+    <ons-page id="Tab2">
+      <p style="text-align: center;">
+        This is the Third page.
+      </p>
+    </ons-page>
+  </template>
+  <script>
+  document.addEventListener('prechange', function(event) {
+    document.querySelector('ons-toolbar .center')
+      .innerHTML = event.tabItem.getAttribute('label');
+  });
+  </script>
+</body>
+</html>
