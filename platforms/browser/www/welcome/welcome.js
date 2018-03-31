@@ -10,78 +10,103 @@
 	}])
 
 
+.controller('WelcomeCtrl', ['$scope', 'CommonProp', '$firebaseArray', '$firebaseObject', '$location', '$timeout', function($scope, CommonProp, $firebaseArray, $firebaseObject, $location, $timeout){
+	$scope.user = { event: 'Event Name',description: 'Event Description',Location: 'Event Location', date: 1522206895 };
+	$scope.eventForm = {};
+	$scope.edit = { event: 'Event Name',description: 'Event Description',Location: 'Event Location', date: 1522206895 };
+	$scope.editForm = {};
+	$scope.username = CommonProp.getUser();
+	$scope.userEvent = {};
+	$scope.showCreate = false;$scope.showList = false;$scope.showLoad = true;$scope.showEdit = false;
+	$scope.current = Date.now();
 
-	.controller('WelcomeCtrl', ['$scope', 'CommonProp', '$firebaseArray', '$firebaseObject', '$location','$timeout', function($scope, CommonProp, $firebaseArray, $firebaseObject, $location,$timeout){
-		$scope.username = CommonProp.getUser();
-		$scope.showLoad = true;
-		$scope.showData = false;
+	var add = firebase.database().ref().child('Event');
+	$scope.events = $firebaseArray(add);
 
-		if(!$scope.username){
-			$location.path('/home');
-		}
-		var rev = firebase.database().ref("Event");
-		rev.orderByChild("email").equalTo($scope.username).on("child_added", function(snapshot) {
-				 $timeout(function(){ 
-				    $scope.userEvent = snapshot.val();
-				    $scope.showLoad = false;$scope.showData = true;
-				  });
-			}, function(error) {
-				  // The Promise was rejected.
-				  console.error(error);});
 
-		var list = firebase.database().ref().child('Event');
-		$scope.events = $firebaseArray(list);
+	var ref = firebase.database().ref("Event");
+	ref.orderByChild("email").equalTo($scope.username).on("child_added", function(snapshot) {
+		 	$timeout(function(){ 
+		    	$scope.userEvent = snapshot.val();
+		    	console.log($scope.userEvent);
+		    	/*var timestamp = data[0].bdatetime;
+				var date = new Date(timestamp * 1000);
+				var datevalues = ('0' + date.getDate()).slice(-2) + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes();
+				$scope.bdatetime = datevalues;*/
+				$scope.showCreate = false;$scope.showList = true;$scope.showLoad = false;$scope.showEdit = false;
+		  	});
+		}, function(error) {
+			  // The Promise was rejected.
+			  console.error(error);});
 
-		$scope.editEvent = function(id){
-			var ref = firebase.database().ref().child('Event/' + id);
-			$scope.editPostData = $firebaseObject(ref);
-		};
+	$scope.Create = function(){
+		$scope.events.$add({
+			event: $scope.user.event,
+			email: $scope.username,
+			description: $scope.user.description,
+			Location: $scope.user.Location,
+			date: $scope.user.date.getTime()
+		}).then(function(add){
+			console.log("Event create Successful");
+			ons.notification.alert("Event create Successful");
+			$scope.showCreate = false;$scope.showList = true;$scope.showLoad = false;$scope.showEdit = false;
+		});
+	}
 
-		$scope.updateEvent = function(id){
-			var ref = firebase.database().ref().child('Event/' + id);
+	$scope.Update = function(id){
+		var ref = firebase.database().ref().child('Event/' + id);
+		if($scope.editPostData.event!=null && $scope.editPostData.date!=null && $scope.editPostData.description!=null && $scope.editPostData.Location!=null)
+		{
 			ref.update({
-				title: $scope.editPostData.title,
-				post: $scope.editPostData.post
+				event: $scope.editPostData.event,
+				email: $scope.username,
+				description: $scope.editPostData.description,
+				Location: $scope.editPostData.Location,
+				date: $scope.editPostData.date.getTime()
 			}).then(function(ref){
-				$scope.$apply(function(){
-					$("#editModal").modal('hide');
-				});
 			}, function(error){
 				console.log(error);
 			});
-		};
-
-		$scope.deleteCnf = function(article){
-			$scope.deleteArticle = article;
-		};
-
-		$scope.deleteEvent = function(deleteArticle){
-			$scope.articles.$remove(deleteArticle);
-			$("#deleteModal").modal('hide');
-		};
-
-		$scope.logout = function(){
-			CommonProp.logoutUser();
+			$scope.showCreate = false;$scope.showList = true;$scope.showLoad = false;$scope.showEdit = false;
+			console.log("Event Update Successful");
+			ons.notification.alert("Event Update Successful");
 		}
-
-	}]);
-
-		function openNav() {
-	    document.getElementById("mySidenav").style.width = "250px";
+		else{
+			console.log("Error with event update!!");
 		}
+	}
 
-		function closeNav() {
-		    document.getElementById("mySidenav").style.width = "0";
-		}
+	$scope.Createform = function(){
+		$scope.showCreate = true;$scope.showList = false;$scope.showLoad = false;$scope.showEdit = false;
 
-		document.addEventListener('init', function(event) {
-	  var page = event.target;
+	}
+	$scope.editEvent = function(id){
+		var ref = firebase.database().ref().child('Event/' + id);
+		$scope.editPostData = $firebaseObject(ref);
+		$scope.showCreate = false;$scope.showList = false;$scope.showLoad = false;$scope.showEdit = true;	
 
-	  if (page.id === 'list_event') {
-	    page.querySelector('#push-button').onclick = function() {
-	      document.querySelector('#myNavigator').pushPage('view_event.html', {data: {title: event.event}});
-	    };
-	  } else if (page.id === 'view_event') {
-	    page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
-	  }
-	});
+	}
+	$scope.deleteEvent = function(id){
+		$scope.showCreate = false;$scope.showList = false;$scope.showLoad = true;$scope.showEdit = false;
+		var ref = firebase.database().ref().child('Event/' + id);
+		$timeout(function(){
+			ref.remove();
+			console.log("Event Deletion Successful");
+			ons.notification.alert("Event Deletion Successful");
+			var reload = firebase.database().ref().child('Event');
+			$scope.events = $firebaseArray(reload);
+			$scope.showCreate = false;$scope.showList = true;$scope.showLoad = false;$scope.showEdit = false;
+		});
+	}
+	$scope.Cancel = function(){
+		$scope.showCreate = false;$scope.showList = true;$scope.showEdit = false;$scope.showLoad = false;	
+	}
+
+	if(!$scope.username){
+		$location.path('/home');
+	}
+
+	$scope.logout = function(){
+		CommonProp.logoutUser();
+	}
+}]);
