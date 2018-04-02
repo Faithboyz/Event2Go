@@ -35,6 +35,7 @@
       <div class="rect5"></div>
     </div>
   </div>
+  <br/>
   <div ng-if="showList">
     <div ng-repeat="event in events">
       <div ng-if="event.email==username" >
@@ -45,16 +46,16 @@
       </div>
       <div class="center">
         <span class="list-item__subtitle">Description: {{event.description}}</span>
-        <span class="list-item__subtitle">Date: {{event.date* 1000 | date:'dd-MM-yy'}}</span>
-        <span class="list-item__subtitle">Location: {{event.location}}</span>
-        <span class="list-item__subtitle">Time: {{event.time}}</span>
+        <span class="list-item__subtitle">Date: {{event.date | date:'dd-MM-yyyy'}}</span>
+        <span class="list-item__subtitle">Location: {{event.Location}}</span>
+        <span class="list-item__subtitle">Time: {{event.date | date:'HH:mm a'}}</span>
       </div>
       <div class="right">
             <ons-button type="submit" class="button--outline" ng-click="editEvent(event.$id)" >Edit</ons-button>&nbsp;
             <ons-button type="button" class="button--outline" ng-click="deleteEvent(event.$id)">Delete</ons-button>
         <br/>
          </div>
-    </ons-list-item>
+    </ons-list-item><br/>
 
         
     </div>
