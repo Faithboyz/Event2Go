@@ -51,7 +51,7 @@
             <div class="card">
               <h2 class="card__title">{{event.event}}</h2>
               <div class="card__content">{{event.Location}}</div>
-              <div class="card__content">{{event.date* 1000 | date:'yyyy-MM-dd HH:mm'}}</div>
+              <div class="card__content">{{event.date* 1000 | date:'yyyy-MM-dd HH:mm a'}}</div>
               <div class="card__content">{{event.description}}</div><br/>
               <button type="submit" class="btn btn-sm btn-primary" ng-click="JoinPost(event.$id)" data-target="#JoinModal" data-toggle="modal">Join Event</button>
           </div>

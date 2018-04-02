@@ -34,6 +34,18 @@ angular.module('Event2Go.welcome', ['ngRoute', 'firebase'])
 		$scope.editPostData = $firebaseObject(ref);
 	};
 
+	$scope.JoinPost = function(id){
+	var add = firebase.database().ref().child('Group');
+	var user = $scope.username;
+	$scope.groups = $firebaseArray(add);
+	 	$scope.groups.$add({
+	 		event: id,
+	 		user: $scope.username
+	 	}).then(function(add){
+	 		console.log("Event joined!!");
+	 	});
+	 };
+
 	$scope.updateEvent = function(id){
 		var ref = firebase.database().ref().child('Event/' + id);
 		ref.update({
