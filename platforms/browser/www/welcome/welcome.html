@@ -26,14 +26,10 @@
 
     <div class="toolbar__right">
 
-      <!--<span class="toolbar-button toolbar-button--outline">+ Event</span>-->
       <span class="toolbar-button toolbar-button--outline" ng-click="logout()">Logout</span>
     
     </div>
   </div>
-
-      <!--<span class="toolbar-button toolbar-button--outline" ng-click="logout()">Logout</span>-->
-  <input type="search" value="" placeholder="Search" class="search-input" style="width: 100%;">
   <div ng-if="showLoad">
     <div class="spinner">
       <div class="rect1"></div>
@@ -47,15 +43,17 @@
   <div ng-if="showData">
     <div ng-repeat="event in events">
       <div ng-if="event.email!=username" >
-          <div style="height: 200px; padding: 1px 0 0 0;">
-            <div class="card">
-              <h2 class="card__title">{{event.event}}</h2>
-              <div class="card__content">{{event.Location}}</div>
-              <div class="card__content">{{event.date* 1000 | date:'yyyy-MM-dd HH:mm a'}}</div>
-              <div class="card__content">{{event.description}}</div><br/>
-              <button type="submit" class="btn btn-sm btn-primary" ng-click="JoinPost(event.$id)" data-target="#JoinModal" data-toggle="modal">Join Event</button>
-          </div>
-        </div>
+ <ons-list-header>Event list header</ons-list-header>
+ 
+       <ons-list-item >
+         <div class="left">
+           <span class="list-item__title">{{event.event}}</span><span class="list-item__subtitle">{{event.description}}</span>
+         </div>
+         <div class="right">
+            <ons-button onclick="notify()" type="submit" class="button--outline" >View</ons-button>  <br/>
+         </div>
+ 
+       </ons-list-item>
       </div>
     </div>
   </div>
