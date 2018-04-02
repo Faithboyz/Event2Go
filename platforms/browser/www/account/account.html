@@ -37,39 +37,44 @@
     </div>
   </div>
   
-  <div ng-if="showData">
-    <div style="height: 200px; padding: 1px 0 0 0;">
-      <div class="card" >
-        <h2 class="card__title"><pre>{{userAccount.name| json }}</pre></h2>
-        <div class="card__content"><img src="img/default.jpg" alt="" class="img-rounded img-responsive" /></div>
-        <div class="card__content">{{location}}</div>
-        <div class="card__content"><pre>{{userAccount.email| json }}</pre></div>
-        <div class="card__content"><pre>{{userAccount.age| json }}</pre></div>
-        <div class="card__content"><pre>{{userAccount.description| json }}</pre></div>
+  <div ng-if="showData" >
+
+   <ons-card class="col-sm-20 offset-sm-1 text-center">
+    <img  src="img/default.jpg"  style="width: 25%">
+     <div class="title">
+      {{userAccount.name| json }} , {{userAccount.age| json }}
     </div>
-  </div>
+    <div class="content">
+      <ons-list>
+        <ons-list-header>User Detais: </ons-list-header>
+        <ons-list-item>Description: {{userAccount.description| json }} </ons-list-item>
+        <ons-list-item>Location: {{userAccount.location}} </ons-list-item>
+        <ons-list-item>Email: {{userAccount.email| json }} </ons-list-item>
+      </ons-list>
+    </div>
+  </ons-card>
   </div>
   <div ng-if="showEdit">
     <div class="col-sm-10 offset-sm-1 text-center">
       <br /><br />
       <form role="form" class="form" name="updateForm" novalidate="">
         <div ng-class="{'has-error': updateForm.name.$invalid && updateForm.name.$touched}">
-          <div><input class="text-input text-input--material" name="name" ng-model="user.name" type="text" ng-value="userAccount.name" required></div>
+          <div>Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input class="text-input text-input--material" name="name" ng-model="user.name" type="text" ng-value="userAccount.name" required></div>
           <small class="help-block" ng-show="updateForm.name.$invalid && updateForm.name.$touched" ></small>
         </div>
         <br />
         <div ng-class="{'has-error': updateForm.location.$invalid && updateForm.location.$touched}">
-          <div><input class="text-input text-input--material" name="location" ng-model="user.location" type="text" ng-value="location" required></div>
+          <div>Location:&nbsp;&nbsp;&nbsp;&nbsp; <input class="text-input text-input--material" name="location" ng-model="user.location" type="text" ng-value="location" required></div>
           <small class="help-block" ng-show="updateForm.location.$invsalid && updateForm.location.$touched" ></small>
         </div>
         <br />
         <div ng-class="{'has-error': updateForm.age.$invalid && updateForm.age.$touched}">
-          <div><input class="text-input text-input--material" name="age" ng-model="user.age" type="text" ng-value="userAccount.age" required></div>
+          <div>Age:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input class="text-input text-input--material" name="age" ng-model="user.age" type="text" ng-value="userAccount.age" required></div>
           <small class="help-block" ng-show="updateForm.age.$invalid && updateForm.age.$touched" ></small>
         </div>
         <br />
         <div ng-class="{'has-error': updateForm.description.$invalid && updateForm.description.$touched}">
-          <div><input class="text-input text-input--material" name="description" ng-model="user.description" type="text" ng-value="userAccount.description" required></div>
+          <div>Description:&nbsp;<input class="text-input text-input--material" name="description" ng-model="user.description" type="text" ng-value="userAccount.description" required></div>
           <small class="help-block" ng-show="updateForm.description.$invalid && updateForm.description.$touched" ></small>
         </div>
         <br />

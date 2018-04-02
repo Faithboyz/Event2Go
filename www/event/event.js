@@ -10,7 +10,7 @@ angular.module('Event2Go.event', ['ngRoute', 'firebase'])
 }])
 
 .controller('EventCtrl', ['$scope', 'CommonProp', '$firebaseArray', '$firebaseObject', '$location', '$timeout', function($scope, CommonProp, $firebaseArray, $firebaseObject, $location, $timeout){
-	$scope.user = { event: 'Event Name',description: 'Event Description',Location: 'Event Location', date: 1522206895 };
+	$scope.user = { event: '',description: '',Location: '', date: 1522206895 };
 	$scope.eventForm = {};
 	$scope.edit = { event: 'Event Name',description: 'Event Description',Location: 'Event Location', date: 1522206895 };
 	$scope.editForm = {};
@@ -47,6 +47,7 @@ angular.module('Event2Go.event', ['ngRoute', 'firebase'])
 			date: $scope.user.date.getTime()
 		}).then(function(add){
 			console.log("Event Created !!");
+			ons.notification.alert('event successfully created');
 			$scope.showCreate = false;$scope.showList = true;$scope.showLoad = false;$scope.showEdit = false;
 		});
 	}
@@ -86,6 +87,7 @@ angular.module('Event2Go.event', ['ngRoute', 'firebase'])
 		$timeout(function(){
 			ref.remove();
 			console.log("Value deleted");
+			ons.notification.alert('successfully event deleted');
 			var reload = firebase.database().ref().child('Event');
 			$scope.events = $firebaseArray(reload);
 			$scope.showCreate = false;$scope.showList = true;$scope.showLoad = false;$scope.showEdit = false;

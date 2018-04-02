@@ -77,11 +77,14 @@ angular.module('Event2Go.account', ['ngRoute', 'firebase'])
 			name: name,
 			picture: 'default.jpg',
 			location: location
+			  
 		}).then(function(ref){
 		}, function(error){
 			console.log(error);
 		});
+
 		$scope.showLoad = false;$scope.showData = true;$scope.showEdit = false;
+		ons.notification.alert('successfully update user details');
 	};
 	if(!$scope.username){
 		$location.path('/home');

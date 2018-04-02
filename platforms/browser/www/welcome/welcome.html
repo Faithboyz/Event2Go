@@ -43,17 +43,21 @@
   <div ng-if="showData">
     <div ng-repeat="event in events">
       <div ng-if="event.email!=username" >
- <ons-list-header>Event list header</ons-list-header>
- 
-       <ons-list-item >
-         <div class="left">
-           <span class="list-item__title">{{event.event}}</span><span class="list-item__subtitle">{{event.description}}</span>
+      <ons-list-header class="list-item__title" >{{event.event}}</ons-list-header>
+    <ons-list-item style="  background-color: lightgrey; " modifier="nodivider">
+      <div class="left">
+        <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
+      </div>
+      <div class="center">
+        <span class="list-item__subtitle">Description: {{event.description}}</span>
+        <span class="list-item__subtitle">Date: {{event.date* 1000 | date:'dd-MM-yy'}}</span>
+        <span class="list-item__subtitle">Location: {{event.location}}</span>
+        <span class="list-item__subtitle">Time: {{event.time}}</span>
+      </div>
+      <div class="right">
+      <ons-button onclick="notify()" type="submit" class="button--outline" >View</ons-button>  <br/>
          </div>
-         <div class="right">
-            <ons-button onclick="notify()" type="submit" class="button--outline" >View</ons-button>  <br/>
-         </div>
- 
-       </ons-list-item>
+    </ons-list-item>
       </div>
     </div>
   </div>

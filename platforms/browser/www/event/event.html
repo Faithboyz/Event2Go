@@ -26,7 +26,6 @@
       <span class="toolbar-button toolbar-button--outline" ng-click="Createform()">+ Event</span>
     </div>
   </div>
-  <br />
   <div ng-if="showLoad">
     <div class="spinner">
       <div class="rect1"></div>
@@ -39,16 +38,25 @@
   <div ng-if="showList">
     <div ng-repeat="event in events">
       <div ng-if="event.email==username" >
-        <div style="height: 200px; padding: 1px 0 0 0;">
-          <div class="card">
-            <h2 class="card__title">{{event.event}}</h2>
-            <div class="card__content">{{event.Location}}</div>
-            <div class="card__content">{{event.date* 1000 | date:'dd-MM-yy'}}</div>
-            <div class="card__content">{{event.description}}</div><br/>
-            <button type="submit" class="btn btn-sm btn-primary" ng-click="editEvent(event.$id)" >Edit</button>
-            <button type="button" class="btn btn-sm btn-danger" ng-click="deleteEvent(event.$id)">Delete</button>
-          </div>
-        </div>
+      <ons-list-header class="list-item__title" >{{event.event}}</ons-list-header>
+    <ons-list-item style="  background-color: lightgrey; " modifier="nodivider">
+      <div class="left">
+        <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
+      </div>
+      <div class="center">
+        <span class="list-item__subtitle">Description: {{event.description}}</span>
+        <span class="list-item__subtitle">Date: {{event.date* 1000 | date:'dd-MM-yy'}}</span>
+        <span class="list-item__subtitle">Location: {{event.location}}</span>
+        <span class="list-item__subtitle">Time: {{event.time}}</span>
+      </div>
+      <div class="right">
+            <ons-button type="submit" class="button--outline" ng-click="editEvent(event.$id)" >Edit</ons-button>&nbsp;
+            <ons-button type="button" class="button--outline" ng-click="deleteEvent(event.$id)">Delete</ons-button>
+        <br/>
+         </div>
+    </ons-list-item>
+
+        
     </div>
   </div>
 </div>
@@ -57,28 +65,27 @@
       <br /><br />
       <form role="form" class="form" name="eventForm" novalidate="">
         <div ng-class="{'has-error': eventForm.event.$invalid && eventForm.event.$touched}">
-          <div><input class="text-input text-input--material" type="name" name="event" ng-model="user.event" placeholder="Event Name" required=""></div>
+          <div>Event Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="text-input text-input--material" type="name" name="event" ng-model="user.event"  required=""></div>
           <small class="help-block" ng-show="eventForm.event.$invalid && eventForm.event.$touched">Please enter an Event name</small>
         </div>
           <br />
         <div ng-class="{'has-error': eventForm.Location.$invalid && eventForm.Location.$touched}">
-          <div><input class="text-input text-input--material" type="text" name="Location" ng-model="user.Location" placeholder="Event Location" required=""></div>
+          <div>Event Location:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="text-input text-input--material" type="text" name="Location" ng-model="user.Location"  required=""></div>
           <small class="help-block" ng-show="eventForm.Location.$invalid && eventForm.Location.$touched">Please enter an Event Location</small>
         </div>
           <br />
         <div ng-class="{'has-error': eventForm.date.$invalid && eventForm.date.$touched}">
-          <div><input class="text-input text-input--material" type="datetime-local" name="date" ng-model="user.date" placeholder="Event Date" required=""></div>
+          <div>Event Date(d-m-y):<input class="text-input text-input--material" type="datetime-local" name="date" ng-model="user.date"  required=""></div>
           <small class="help-block" ng-show="eventForm.date.$invalid && eventForm.date.$touched">Please enter an Event date</small>
         </div>
           <br />
         <div ng-class="{'has-error': eventForm.description.$invalid && eventForm.description.$touched}">
-          <div><input class="text-input text-input--material" type="text" name="description" ng-model="user.description" placeholder="Event description" required=""></div>
+          <div>Event Description:&nbsp;&nbsp;<input class="text-input text-input--material" type="text" name="description" ng-model="user.description"  required=""></div>
           <small class="help-block" ng-show="eventForm.description.$invalid && eventForm.description.$touched">Please enter an Event description</small>
         </div>
           <br />
           <br />
           <a type="button"  name="cancel" class="button--large--cta"  ng-click="Cancel()">Cancel</a><br />
-          <br />
           <a type="button"  name="submit" class="button--large--cta"  ng-disabled="eventForm.$invalid" ng-click="Create()">Create</a>
       </form>
     </div>
@@ -88,28 +95,27 @@
       <br /><br />
       <form role="form" class="form" name="editForm" novalidate="">
         <div ng-class="{'has-error': editForm.event.$invalid && editForm.event.$touched}">
-          <div><input class="text-input text-input--material" type="name" name="event" ng-model="editPostData.event" placeholder="Event Name" required=""></div>
+          <div>Event Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="text-input text-input--material" type="name" name="event" ng-model="editPostData.event"  required=""></div>
           <small class="help-block" ng-show="editForm.event.$invalid && editForm.event.$touched">Please enter an Event name</small>
         </div>
           <br />
         <div ng-class="{'has-error': editForm.Location.$invalid && editForm.Location.$touched}">
-          <div><input class="text-input text-input--material" type="text" name="Location" ng-model="editPostData.Location" placeholder="Event Location" required=""></div>
+          <div>Event Location:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="text-input text-input--material" type="text" name="Location" ng-model="editPostData.Location"  required=""></div>
           <small class="help-block" ng-show="editForm.Location.$invalid && editForm.Location.$touched">Please enter an Event Location</small>
         </div>
           <br />
         <div ng-class="{'has-error': editForm.date.$invalid && editForm.date.$touched}">
-          <div><input class="text-input text-input--material" type="datetime-local" name="date" ng-model="editPostData.date" placeholder="Event Date" required=""></div>
-          <small class="help-block" ng-show="editForm.date.$invalid && editForm.date.$touched">Please enter an Event date</small>
+          <div>Event Date(d-m-y):<input class="text-input text-input--material" type="datetime-local" name="date" ng-model="editPostData.date" required=""></div>
+          <small align="left" class="help-block" ng-show="editForm.date.$invalid && editForm.date.$touched">Please enter an Event date</small>
         </div>
           <br />
         <div ng-class="{'has-error': editForm.description.$invalid && editForm.description.$touched}">
-          <div><input class="text-input text-input--material" type="text" name="description" ng-model="editPostData.description" placeholder="Event description" required=""></div>
+          <div>Event Description:&nbsp;&nbsp;<input class="text-input text-input--material" type="text" name="description" ng-model="editPostData.description" required=""></div>
           <small class="help-block" ng-show="editForm.description.$invalid && editForm.description.$touched">Please enter an Event description</small>
         </div>
           <br />
           <br />
           <a type="button"  name="cancel" class="button--large--cta"  ng-click="Cancel()">Cancel</a><br />
-          <br />
           <a type="button"  name="submit" class="button--large--cta"  ng-disabled="editForm.$invalid" ng-click="Update(editPostData.$id)">Update</a>
       </form>
     </div>
