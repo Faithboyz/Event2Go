@@ -1,108 +1,84 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Event 2 Go</title>
+
   <link rel="stylesheet" href="css/slideMenu.css"/>
-</head>
-<body ng-controller="WelcomeCtrl">
-  <div id="mySidenav" class="sidenav">
+
+<ons-navigator swipeable id="myNavigator" page="list_event.html"></ons-navigator>
+
+<template id="list_event.html">
+  <ons-page ng-controller="WelcomeCtrl" id="list_event">
+    <ons-toolbar>
+          <div class="left">
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;
+      <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="#!/welcome">Home</a>
     <a href="#!/account">Profile</a>
-    <a href="#!/welcome">Events</a>
+    <a href="#!/event">Events</a>
     <a href="#" ng-click="logout()">Logout</a>
   </div>
-  <div class="toolbar">
-    <div class="toolbar__left">
-        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;
           </span>
     </div>
 
-    <div class="toolbar__center">
+    <div class="center">
       Events
 
     </div>
 
-    <div class="toolbar__right">
+    <div class="right">
 
       <!--<span class="toolbar-button toolbar-button--outline">+ Event</span>-->
       <span class="toolbar-button toolbar-button--outline" ng-click="logout()">Logout</span>
     
     </div>
-  </div>
+    </ons-toolbar>
+      <div ng-if="showData">
+    <div ng-repeat="event in events">
+      <div ng-if="event.email!=username" >
+      <ons-list-header>Event list header</ons-list-header>
 
-  <div class="tabbar tabbar--top tabbar--top-border">
-    <label class="tabbar__item tabbar--top-border__item">
-      <input type="radio" name="top-tabbar-b" checked="checked">
-      <button class="tabbar__button tabbar--top-border__button">
-        Home
-      </button>
-    </label>
+      <ons-list-item >
+        <div class="left">
+          <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
+        </div>
+        <div class="center">
+          <span class="list-item__title">{{Event.Event}}</span><span class="list-item__subtitle">{{event.description}}</span>
+        </div>
+        <div class="right">
+            <ons-button id="push-button" type="submit" class="button--outline" ng-click="JoinPost(event.$id)" data-target="#JoinModal" data-toggle="modal">View</ons-button><br/>
+        </div>
 
-    <label class="tabbar__item tabbar--top-border__item">
-      <input type="radio" name="top-tabbar-b">
-      <button class="tabbar__button tabbar--top-border__button">
-        Comments
-      </button>
-    </label>
+      </ons-list-item>
+    </div></div></div>
+  </ons-page>
+</template>
 
-    <label class="tabbar__item tabbar--top-border__item">
-      <input type="radio" name="top-tabbar-b">
-      <button class="tabbar__button tabbar--top-border__button">
-        Activity
-      </button>
-    </label>
-  </div>
+<template id="view_event.html">
+  <ons-page ng-controller="WelcomeCtrl" id="view_event">
+    <ons-toolbar>
+      <div class="left"><ons-back-button>Page 1</ons-back-button></div>
+          <div class="center">
+      {{event.event}}
 
-      <!--<span class="toolbar-button toolbar-button--outline" ng-click="logout()">Logout</span>-->
-  <input type="search" value="" placeholder="Search" class="search-input" style="width: 280px;">
-  <ul class="list list--material">
-    <li class="list-item list-item--material">
-      <div class="list-item__left list-item--material__left">
-        <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/42/41" alt="Cute kitten">
-      </div>
+    </div>
 
-      <div class="list-item__center list-item--material__center">
-        <div class="list-item__title list-item--material__title">Lily</div>
-        <div class="list-item__subtitle list-item--material__subtitle">Very friendly cat</div>
-      </div>
-    </li>
+    <div class="right">
+      <span class="toolbar-button toolbar-button--outline" ng-click="logout()">Logout</span>
+    
+    </div>
+    </ons-toolbar>
+ <ons-card>
+    <img src="../img/background1.png" alt="" style="width: 100%">
+    <div class="title">
+      {{event.event}}
+    </div>
+    <div class="content">
 
-    <li class="list-item list-item--material">
-      <div class="list-item__left list-item--material__left">
-        <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/40/40" alt="Cute kitten">
-      </div>
-
-      <div class="list-item__center list-item--material__center">
-        <div class="list-item__title list-item--material__title">Molly</div>
-        <div class="list-item__subtitle list-item--material__subtitle">Loves tuna!</div>
-      </div>
-    </li>
-  <ul class="list list--material">
-    <li class="list-item list-item--material">
-      <div class="list-item__left list-item--material__left">
-        <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/42/41" alt="Cute kitten">
-      </div>
-
-      <div class="list-item__center list-item--material__center">
-        <div class="list-item__title list-item--material__title">Lily</div>
-        <div class="list-item__subtitle list-item--material__subtitle">Very friendly cat</div>
-      </div>
-    </li>
-
-    <li class="list-item list-item--material">
-      <div class="list-item__left list-item--material__left">
-        <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/40/40" alt="Cute kitten">
-      </div>
-
-      <div class="list-item__center list-item--material__center">
-        <div class="list-item__title list-item--material__title">Molly</div>
-        <div class="list-item__subtitle list-item--material__subtitle">Loves tuna!</div>
-      </div>
-    </li>
-
-  </ul>
-  </ul>
-
-</body>
-</html>
+      <ons-list>
+        <ons-list-header>Description: {{event.description}}</ons-list-header>
+        <ons-list-item>Location: {{event.location}}</ons-list-item>
+        <ons-list-item>Date: {{event.date}}</ons-list-item>
+        <ons-list-item>time: {{event.time}}</ons-list-item>
+      </ons-list>
+    </div>
+  </ons-card>
+  </ons-page>
+</template>

@@ -82,3 +82,15 @@ angular.module('Event2Go.welcome', ['ngRoute', 'firebase'])
 	function closeNav() {
 	    document.getElementById("mySidenav").style.width = "0";
 	}
+
+	document.addEventListener('init', function(event) {
+  var page = event.target;
+
+  if (page.id === 'list_Events') {
+    page.querySelector('#push-button').onclick = function() {
+      document.querySelector('#myNavigator').pushPage('view_event.html', {data: {title: event.event}});
+    };
+  } else if (page.id === 'view_event') {
+    page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
+  }
+});
