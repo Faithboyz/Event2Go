@@ -39,28 +39,26 @@
   <div ng-if="showList">
     <div ng-repeat="event in events">
       <div ng-if="event.email==username" >
-      <ons-list-header class="list-item__title" >{{event.event}}</ons-list-header>
-    <ons-list-item style="  background-color: lightgrey; " modifier="nodivider">
-      <div class="left">
-        <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
+       <ons-list-header class="list-item__title" >{{event.event}}</ons-list-header>
+        <ons-list-item style="  background-color: lightgrey; " modifier="nodivider">
+        <div class="left">
+         <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
+        </div>
+        <div class="center">
+          <span class="list-item__subtitle">Description: {{event.description}}</span>
+          <span class="list-item__subtitle">Date: {{event.date | date:'dd-MM-yyyy'}}</span>
+          <span class="list-item__subtitle">Location: {{event.Location}}</span>
+          <span class="list-item__subtitle">Time: {{event.date | date:'HH:mm a'}}</span>
+        </div>
+        <div class="right">
+          <ons-button type="submit" class="button--outline" ng-click="editEvent(event.$id)" >Edit</ons-button>&nbsp;
+          <ons-button type="button" class="button--outline" ng-click="deleteEvent(event.$id)">Delete</ons-button>
+          <br/>
+        </div>
+        </ons-list-item><br/>
       </div>
-      <div class="center">
-        <span class="list-item__subtitle">Description: {{event.description}}</span>
-        <span class="list-item__subtitle">Date: {{event.date | date:'dd-MM-yyyy'}}</span>
-        <span class="list-item__subtitle">Location: {{event.Location}}</span>
-        <span class="list-item__subtitle">Time: {{event.date | date:'HH:mm a'}}</span>
-      </div>
-      <div class="right">
-            <ons-button type="submit" class="button--outline" ng-click="editEvent(event.$id)" >Edit</ons-button>&nbsp;
-            <ons-button type="button" class="button--outline" ng-click="deleteEvent(event.$id)">Delete</ons-button>
-        <br/>
-         </div>
-    </ons-list-item><br/>
-
-        
     </div>
   </div>
-</div>
   <div ng-if="showCreate">
     <div class="col-sm-10 offset-sm-1 text-center">
       <br /><br />

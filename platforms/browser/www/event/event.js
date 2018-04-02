@@ -21,22 +21,22 @@ angular.module('Event2Go.event', ['ngRoute', 'firebase'])
 
 	var add = firebase.database().ref().child('Event');
 	$scope.events = $firebaseArray(add);
+	$scope.showCreate = false;$scope.showList = true;$scope.showLoad = false;$scope.showEdit = false;
 
-
-	var ref = firebase.database().ref("Event");
+	/*var ref = firebase.database().ref("Event");
 	ref.orderByChild("email").equalTo($scope.username).on("child_added", function(snapshot) {
 		 	$timeout(function(){ 
 		    	$scope.userEvent = snapshot.val();
 		    	console.log($scope.userEvent);
-		    	/*var timestamp = data[0].bdatetime;
+		    	var timestamp = data[0].bdatetime;
 				var date = new Date(timestamp * 1000);
 				var datevalues = ('0' + date.getDate()).slice(-2) + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes();
-				$scope.bdatetime = datevalues;*/
+				$scope.bdatetime = datevalues;
 				$scope.showCreate = false;$scope.showList = true;$scope.showLoad = false;$scope.showEdit = false;
 		  	});
 		}, function(error) {
 			  // The Promise was rejected.
-			  console.error(error);});
+			  console.error(error);});*/
 
 	$scope.Create = function(){
 		$scope.events.$add({

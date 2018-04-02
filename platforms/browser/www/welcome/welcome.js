@@ -16,7 +16,8 @@ angular.module('Event2Go.welcome', ['ngRoute', 'firebase'])
 	if(!$scope.username){
 		$location.path('/home');
 	}
-	var rev = firebase.database().ref("Event");
+
+	/*var rev = firebase.database().ref("Event");
 	rev.orderByChild("email").equalTo($scope.username).on("child_added", function(snapshot) {
 			 $timeout(function(){ 
 			    $scope.userEvent = snapshot.val();
@@ -24,10 +25,12 @@ angular.module('Event2Go.welcome', ['ngRoute', 'firebase'])
 			  });
 		}, function(error) {
 			  // The Promise was rejected.
-			  console.error(error);});
+			  console.error(error);});*/
 
 	var list = firebase.database().ref().child('Event');
 	$scope.events = $firebaseArray(list);
+	$scope.showLoad = false;$scope.showData = true;
+	
 
 	$scope.editEvent = function(id){
 		var ref = firebase.database().ref().child('Event/' + id);
@@ -74,14 +77,25 @@ angular.module('Event2Go.welcome', ['ngRoute', 'firebase'])
 	}
 
 }]);
+function openNav() {
+document.getElementById("mySidenav").style.width = "250px";
+}
 
-	function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-	}
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
 
-	function closeNav() {
-	    document.getElementById("mySidenav").style.width = "0";
-	}
+document.addEventListener('init', function(event) {
+var page = event.target;
+
+if (page.id === 'list_Events') {
+    page.querySelector('#push-button').onclick = function() {
+      document.querySelector('#myNavigator').pushPage('view_event.html', {data: {title: event.event}});
+    };
+}else if (page.id === 'view_event') {
+    page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
+}
+});
 var notify = function() {
   ons.notification.alert('You have successfully joined this event');
 };
