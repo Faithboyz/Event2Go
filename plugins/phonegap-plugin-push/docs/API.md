@@ -396,28 +396,4 @@ Parameter | Type | Default | Description
 ```javascript
 push.finish(function() {
 	console.log('success');
-}, function() {
-	console.log('error');
-}, 'push-1');
-```
-
-## push.clearAllNotifications(successHandler, errorHandler) - iOS & Android only
-
-Tells the OS to clear all notifications from the Notification Center
-
-### Parameters
-
-Parameter | Type | Default | Description
---------- | ---- | ------- | -----------
-`successHandler` | `Function` | | Is called when the api successfully clears the notifications.
-`errorHandler` | `Function` | | Is called when the api encounters an error when attempting to clears the notifications.
-
-### Example
-
-```javascript
-push.clearAllNotifications(function() {
-	console.log('success');
-}, function() {
-	console.log('error');
-});
-```
+}, fun
