@@ -19,7 +19,7 @@ angular.module('Event2Go.account', ['ngRoute', 'firebase'])
 	$scope.userAccount = {};
 
 	//set user location as a basic mesure
-	$scope.location = "Toronto, ON";
+	//$scope.location = "Toronto, ON";
 	$scope.showLoad = true;
 	$scope.showData = false;
 	$scope.showEdit = false;
@@ -81,7 +81,7 @@ angular.module('Event2Go.account', ['ngRoute', 'firebase'])
 			var location = $scope.user.location;
 		}
 		else{
-			var location = $scope.location;
+			var location = $scope.userAccount.location;
 		}
 		var ref = firebase.database().ref().child('Account/' + $scope.ID);
 		ref.update({

@@ -33,18 +33,18 @@
     </div>
   </div>
   <!-- account info shown here -->
-  <div ng-if="showData">
-   <ons-card class="col-sm-20 offset-sm-1 text-center">
+  <div  ng-if="showData">
+   <ons-card  class="col-sm-20 offset-sm-1 text-center">
     <img  src="img/default.jpg"  style="width: 25%">
     <div class="title">
-      {{userAccount.name| json }} , {{userAccount.age| json }}
+      {{userAccount.name }} , {{userAccount.age }}
     </div>
     <div class="content">
       <ons-list>
         <ons-list-header>User Detais: </ons-list-header>
-        <ons-list-item>Description: {{userAccount.description| json }} </ons-list-item>
+        <ons-list-item>Description: {{userAccount.description}} </ons-list-item>
         <ons-list-item>Location: {{userAccount.location}} </ons-list-item>
-        <ons-list-item>Email: {{userAccount.email| json }} </ons-list-item>
+        <ons-list-item>Email: {{userAccount.email}} </ons-list-item>
       </ons-list>
     </div>
    </ons-card>
@@ -61,7 +61,7 @@
         </div>
         <br />
         <div ng-class="{'has-error': updateForm.location.$invalid && updateForm.location.$touched}">
-          <div>Location:&nbsp;&nbsp;&nbsp;&nbsp; <input class="text-input text-input--material" name="location" ng-model="user.location" type="text" ng-value="location" required></div>
+          <div>Location:&nbsp;&nbsp;&nbsp;&nbsp; <input class="text-input text-input--material" name="location" ng-model="user.location" type="text" ng-value="userAccount.location" required></div>
           <small class="help-block" ng-show="updateForm.location.$invsalid && updateForm.location.$touched" ></small>
         </div>
         <br />

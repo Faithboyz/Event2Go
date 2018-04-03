@@ -16,12 +16,14 @@ angular.module('Event2Go.signup', ['ngRoute', 'firebase'])
 
 	$scope.signUp = function(){
 		var useremail = $scope.user.email;
+		//useremail= useremail.replace(/^"|"$/g, '');
 		var password = $scope.user.password;
 		var cpassword = $scope.user.cpassword;
 		var username = $scope.user.name;
 		var description = "Hey, it's sure nice to meet you";
 		var profilePic = "default.jpg";
 		var age = 18;
+		var location = "Toronto, ON";
 
 		if(username !="" && password && useremail && password==cpassword){
 			var auth = $firebaseAuth();
@@ -31,6 +33,7 @@ angular.module('Event2Go.signup', ['ngRoute', 'firebase'])
 				name: username,
 				description: description,
 				picture: profilePic,
+				location: location,
 				age: age
 				}).then(function(ref){
 					console.log(ref);
