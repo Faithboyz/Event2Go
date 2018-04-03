@@ -13,10 +13,12 @@ angular.module('Event2Go.welcome', ['ngRoute', 'firebase'])
 	$scope.showLoad = true;
 	$scope.showData = false;
 
+	//check if user logged in
 	if(!$scope.username){
 		$location.path('/home');
 	}
 
+	// get events created by user -- removed, code for refrence
 	/*var rev = firebase.database().ref("Event");
 	rev.orderByChild("email").equalTo($scope.username).on("child_added", function(snapshot) {
 			 $timeout(function(){ 
@@ -27,16 +29,18 @@ angular.module('Event2Go.welcome', ['ngRoute', 'firebase'])
 			  // The Promise was rejected.
 			  console.error(error);});*/
 
+	//get list of events from db
 	var list = firebase.database().ref().child('Event');
 	$scope.events = $firebaseArray(list);
 	$scope.showLoad = false;$scope.showData = true;
 	
-
+	//if the user wanted to edit data for an event
 	$scope.editEvent = function(id){
 		var ref = firebase.database().ref().child('Event/' + id);
 		$scope.editPostData = $firebaseObject(ref);
 	};
 
+	// When a user joins an event -- work in progress	
 	$scope.JoinPost = function(id){
 	var add = firebase.database().ref().child('Group');
 	var user = $scope.username;
@@ -49,34 +53,37 @@ angular.module('Event2Go.welcome', ['ngRoute', 'firebase'])
 	 	});
 	 };
 
+	//after join event if a user wants to leave an event -- work in progress	
 	$scope.updateEvent = function(id){
-		var ref = firebase.database().ref().child('Event/' + id);
+		var ref = firebase.database().ref().child('Group/' + id);
 		ref.update({
 			title: $scope.editPostData.title,
 			post: $scope.editPostData.post
 		}).then(function(ref){
-			$scope.$apply(function(){
-				$("#editModal").modal('hide');
-			});
+
 		}, function(error){
 			console.log(error);
 		});
 	};
 
+	//When a user joins a event, it gets removed from the welcome page -- work in progress	
 	$scope.deleteCnf = function(article){
 		$scope.deleteArticle = article;
 	};
 
+	//When a user joins a event, it gets removed from the welcome page -- work in progress
 	$scope.deleteEvent = function(deleteArticle){
 		$scope.articles.$remove(deleteArticle);
 		$("#deleteModal").modal('hide');
 	};
 
+	//logout user
 	$scope.logout = function(){
 		CommonProp.logoutUser();
 	}
 
 }]);
+//slide menu
 function openNav() {
 document.getElementById("mySidenav").style.width = "250px";
 }
@@ -85,6 +92,7 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
 
+//trial with onsen ui
 document.addEventListener('init', function(event) {
 var page = event.target;
 

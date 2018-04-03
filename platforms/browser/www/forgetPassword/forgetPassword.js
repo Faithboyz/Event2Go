@@ -14,10 +14,12 @@ angular.module('Event2Go.forgetPassword', ['ngRoute', 'firebase'])
 
 	$scope.username = CommonProp.getUser();
 
+	//if user not logged in
 	if($scope.username){
 		$location.path('/welcome');
 	}
 
+	//send account password reset to email
 	$scope.fp = function(){
 		var emailAddress = $scope.user.email;
 		var auth = $firebaseAuth();
@@ -28,11 +30,11 @@ angular.module('Event2Go.forgetPassword', ['ngRoute', 'firebase'])
 			//CommonProp.setUser($scope.user.email); *redirect to login 
 			//var user  = firebase.auth().currentUser;
 			//if(user.emailVerified){
-				$location.path('/home');
+			$location.path('/home');
 			
 		}).catch(function(error){
 			$scope.errMsg = true;
-			 ons.notification.alert('Account not Found.Please try again later');  
+			 ons.notification.alert('Account not Found.Please try again !');  
 			 console.log("account not found");
 			$scope.errorMessage = error.message;
 		});

@@ -11,35 +11,37 @@ angular.module('Event2Go.home', ['ngRoute', 'firebase'])
 
 
 .controller('HomeCtrl', ['$scope', '$firebaseAuth', '$location', 'CommonProp', function($scope, $firebaseAuth, $location, CommonProp){
-
+	//get currently signed up user info
 	$scope.username = CommonProp.getUser();
 
+	//check if user signed in
 	if($scope.username){
 		$location.path('/welcome');
 	}
 
+	// user sign in fucntion
 	$scope.signIn = function(){
 		var username = $scope.user.email;
 		var password = $scope.user.password;
 		var auth = $firebaseAuth();
-
+		// user sign in function
 		auth.$signInWithEmailAndPassword(username, password).then(function(){
-
+			//get user info
 			CommonProp.setUser($scope.user.email);
 			var user  = firebase.auth().currentUser;
+			//check if email verified
 			if(user.emailVerified){
 				$location.path('/welcome');
 				ons.notification.alert("User Login Successful");
 				console.log("User Login Succesfully");
-		}
+			}//else sign out and show alert
 			else{
 				ons.notification.alert("Email not verified");
 				CommonProp.logoutUser();
-			}
-
-			
+			}	
 		}).catch(function(error){
 			$scope.errMsg = true;
+			//other errors if any
 			 ons.notification.alert('Incorrect username or password.');  
 			 console.log("Incorrect username or password.");
 			$scope.errorMessage = error.message;
@@ -47,7 +49,7 @@ angular.module('Event2Go.home', ['ngRoute', 'firebase'])
 	}
 
 }])
-
+//example with getters and setters
 .service('CommonProp', ['$location', '$firebaseAuth', function($location, $firebaseAuth){
 	var user = "";
 	var auth = $firebaseAuth();

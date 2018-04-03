@@ -10,15 +10,22 @@ angular.module('Event2Go.account', ['ngRoute', 'firebase'])
 	});
 }])
 .controller('AccountCtrl', ['$scope', 'CommonProp', '$firebaseArray', '$firebaseObject', '$location', '$timeout', function($scope, CommonProp, $firebaseArray, $firebaseObject, $location, $timeout){
-	$scope.user = { name: '',age: '',description: '',location: '' };
+	//initialize the form variable so as to not cause error later
+	$scope.user = { name: 'B',age: 'B',description: 'B',location: 'B' };
 	$scope.updateForm = {};
+
+	//retrieve the user logged in
 	$scope.username = CommonProp.getUser();
 	$scope.userAccount = {};
+
+	//set user location as a basic mesure
 	$scope.location = "Toronto, ON";
 	$scope.showLoad = true;
 	$scope.showData = false;
 	$scope.showEdit = false;
 	$scope.ID = null;
+
+	//fetch user account info based on current user signed up
 	var ref = firebase.database().ref("Account");
 	ref.orderByChild("email").equalTo($scope.username).on("child_added", function(snapshot) {
 			$scope.userAccount = snapshot.val();
@@ -31,16 +38,23 @@ angular.module('Event2Go.account', ['ngRoute', 'firebase'])
 			  // The Promise was rejected.
 			  console.error(error);});
 
+	//retrieve data for the edit account info form
 	$scope.editPost = function(id){
 		//var ref = firebase.database().ref().child('Articles/' + id);
 		$scope.editPostData = $firebaseObject(ref);
 	};
+
+	//show the form for edit and hide the rest of the views
 	$scope.Edit = function(id){
 		$scope.showLoad = false;$scope.showData = false;$scope.showEdit = true;
 	};
+
+	//cancel the edit
 	$scope.Cancel = function(id){
 		$scope.showLoad = false;$scope.showData = true;$scope.showEdit = false;
 	};
+
+	//update the account info but check if the values have been modiefied or not
 	$scope.Update = function(){
 		if ($scope.user.name != 'B'){
 			var name = $scope.user.name;
@@ -86,6 +100,8 @@ angular.module('Event2Go.account', ['ngRoute', 'firebase'])
 		$scope.showLoad = false;$scope.showData = true;$scope.showEdit = false;
 		ons.notification.alert('successfully update user details');
 	};
+
+	//check if user not logged in
 	if(!$scope.username){
 		$location.path('/home');
 	}
@@ -94,10 +110,12 @@ angular.module('Event2Go.account', ['ngRoute', 'firebase'])
 		CommonProp.logoutUser();
 	}
 }]);
-	function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-	}
 
-	function closeNav() {
-	    document.getElementById("mySidenav").style.width = "0";
-	}
+//slide menu code
+function openNav() {
+document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}

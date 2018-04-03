@@ -1,10 +1,10 @@
-
 <!DOCTYPE html>
 <html>
 <head>
   <title>Event 2 Go</title>
   <link rel="stylesheet" href="css/slideMenu.css"/>
 </head>
+<!-- set controller for the view -->
 <body ng-controller="WelcomeCtrl">
   <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -13,23 +13,20 @@
     <a href="#!/event">Events</a>
     <a href="#" ng-click="logout()">Logout</a>
   </div>
+  <!-- set top toolbar -->
   <div class="toolbar">
     <div class="toolbar__left">
         <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;
           </span>
     </div>
-
     <div class="toolbar__center">
       Event 2 Go
-
     </div>
-
     <div class="toolbar__right">
-
       <span class="toolbar-button toolbar-button--outline" ng-click="logout()">Logout</span>
-    
     </div>
   </div>
+  <!-- loadder animation -->
   <div ng-if="showLoad">
     <div class="spinner">
       <div class="rect1"></div>
@@ -40,24 +37,26 @@
     </div>
   </div>
   <br/>
+  <!-- show all events not created by current user -->
   <div ng-if="showData">
     <div ng-repeat="event in events">
       <div ng-if="event.email!=username" >
-      <ons-list-header class="list-item__title" >{{event.event}}</ons-list-header>
-    <ons-list-item style="  background-color: lightgrey; " modifier="nodivider">
-      <div class="left">
-        <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
-      </div>
-      <div class="center">
-        <span class="list-item__subtitle">Description: {{event.description}}</span>
-        <span class="list-item__subtitle">Date: {{event.date| date:'dd-MM-yyyy'}}</span>
-        <span class="list-item__subtitle">Location: {{event.Location}}</span>
-        <span class="list-item__subtitle">Time: {{event.date| date:'HH:mm a'}}</span>
-      </div>
-      <div class="right">
-      <ons-button onclick="notify()" type="submit" class="button--outline" >Join</ons-button>  
+        <ons-list-header class="list-item__title" >{{event.event}}</ons-list-header>
+        <ons-list-item style="  background-color: lightgrey; " modifier="nodivider">
+          <div class="left">
+            <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40">
+          </div>
+          <div class="center">
+            <span class="list-item__subtitle">Description: {{event.description}}</span>
+            <span class="list-item__subtitle">Date: {{event.date| date:'dd-MM-yyyy'}}</span>
+            <span class="list-item__subtitle">Location: {{event.Location}}</span>
+            <span class="list-item__subtitle">Time: {{event.date| date:'HH:mm a'}}</span>
+          </div>
+          <div class="right">
+            <!-- for now show notification for joining, join post shows work in progress -->
+            <ons-button onclick="notify()" type="submit" class="button--outline" >Join</ons-button>  
          </div>
-    </ons-list-item><br/>
+        </ons-list-item><br/>
       </div>
     </div>
   </div>

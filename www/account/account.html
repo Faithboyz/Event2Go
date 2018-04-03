@@ -4,29 +4,25 @@
 	<title>E2G-profile</title>
   <link rel="stylesheet" href="css/slideMenu.css"/>
 </head>
+<!-- set the controller for the view -->
 <body ng-controller="AccountCtrl">
-  <div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="#!/welcome">Home</a>
-    <a href="#!/account">Profile</a>
-    <a href="#!/event">Events</a>
-    <a href="#" ng-click="logout()">Logout</a>
-  </div>
   <div class="toolbar">
+    <!-- slide menu -->
     <div class="toolbar__left">
         <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;
           </span>
     </div>
-
+    
     <div class="toolbar__center">
       User Profile
     </div>
-
+    <!-- edit acount info -->
     <div class="toolbar__right">
       <span class="toolbar-button toolbar-button--outline" ng-click="Edit()">Edit</span>
     </div>
   </div>
   <br />
+  <!-- loadder animation -->
   <div ng-if="showLoad">
     <div class="spinner">
       <div class="rect1"></div>
@@ -36,12 +32,11 @@
       <div class="rect5"></div>
     </div>
   </div>
-  
+  <!-- account info shown here -->
   <div ng-if="showData">
-
    <ons-card class="col-sm-20 offset-sm-1 text-center">
     <img  src="img/default.jpg"  style="width: 25%">
-     <div class="title">
+    <div class="title">
       {{userAccount.name| json }} , {{userAccount.age| json }}
     </div>
     <div class="content">
@@ -52,8 +47,10 @@
         <ons-list-item>Email: {{userAccount.email| json }} </ons-list-item>
       </ons-list>
     </div>
-  </ons-card>
+   </ons-card>
   </div>
+
+  <!-- edit account info form -->
   <div ng-if="showEdit">
     <div class="col-sm-10 offset-sm-1 text-center">
       <br /><br />
@@ -83,6 +80,15 @@
         <a type="button"  name="submit" class="button--large--cta"  ng-disabled="updateForm.$touched" ng-click="Update()">Update</a>
       </form>
     </div>
+  </div>
+
+  <!-- slide menu, kept last so as to not show html link during site loadup -->
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#!/welcome">Home</a>
+    <a href="#!/account">Profile</a>
+    <a href="#!/event">Events</a>
+    <a href="#" ng-click="logout()">Logout</a>
   </div>
 </body>
 </html>
