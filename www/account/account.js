@@ -10,7 +10,7 @@ angular.module('Event2Go.account', ['ngRoute', 'firebase'])
 	});
 }])
 .controller('AccountCtrl', ['$scope', 'CommonProp', '$firebaseArray', '$firebaseObject', '$location', '$timeout', function($scope, CommonProp, $firebaseArray, $firebaseObject, $location, $timeout){
-	$scope.user = { name: 'B',age: 'B',description: 'B',location: 'B' };
+	$scope.user = { name: '',age: '',description: '',location: '' };
 	$scope.updateForm = {};
 	$scope.username = CommonProp.getUser();
 	$scope.userAccount = {};
