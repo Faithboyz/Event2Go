@@ -73,7 +73,7 @@
         </div>
           <br />
         <div ng-class="{'has-error': eventForm.date.$invalid && eventForm.date.$touched}">
-          <div>Event Date(d-m-y):<input class="text-input text-input--material" type="datetime-local" name="date" ng-model="user.date"  required=""></div>
+          <div>Date(dd-mm-yyyyy):<input class="text-input text-input--material" type="datetime-local" name="date" ng-model="user.date"  required=""></div>
           <small class="help-block" ng-show="eventForm.date.$invalid && eventForm.date.$touched">Please enter an Event date</small>
         </div>
           <br />
@@ -104,7 +104,7 @@
         </div>
           <br />
         <div ng-class="{'has-error': editForm.date.$invalid && editForm.date.$touched}">
-          <div>Event Date(d-m-y):<input class="text-input text-input--material" type="datetime-local" name="date" ng-model="editPostData.date" required=""></div>
+          <div>Date(dd-mm-yyyyy):<input class="text-input text-input--material" type="datetime-local" name="date" ng-model="editPostData.date" required=""></div>
           <small align="left" class="help-block" ng-show="editForm.date.$invalid && editForm.date.$touched">Please enter an Event date</small>
         </div>
           <br />
