@@ -4,14 +4,9 @@
   <title>E2G-profile</title>
   <link rel="stylesheet" href="css/slideMenu.css"/>
 </head>
+<!-- Set the controller for the view -->
 <body ng-controller="EventCtrl">
-  <div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="#!/welcome">Home</a>
-    <a href="#!/account">Profile</a>
-    <a href="#!/event">Events</a>
-    <a href="#" ng-click="logout()">Logout</a>
-  </div>
+  <!-- top toolbar setup -->
   <div class="toolbar">
     <div class="toolbar__left">
         <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;
@@ -21,11 +16,12 @@
     <div class="toolbar__center">
       My events
     </div>
-
+    <!-- creat a new event -->
     <div class="toolbar__right">
       <span class="toolbar-button toolbar-button--outline" ng-click="Createform()">+ Event</span>
     </div>
   </div>
+  <!-- loadder animation -->
   <div ng-if="showLoad">
     <div class="spinner">
       <div class="rect1"></div>
@@ -36,6 +32,7 @@
     </div>
   </div>
   <br/>
+  <!-- Show events created by the user -->
   <div ng-if="showList">
     <div ng-repeat="event in events">
       <div ng-if="event.email==username" >
@@ -59,6 +56,8 @@
       </div>
     </div>
   </div>
+
+  <!-- Show the create event form -->
   <div ng-if="showCreate">
     <div class="col-sm-10 offset-sm-1 text-center">
       <br /><br />
@@ -89,6 +88,7 @@
       </form>
     </div>
   </div>
+  <!-- Set and show the edit event form -->
   <div ng-if="showEdit">
     <div class="col-sm-10 offset-sm-1 text-center">
       <br /><br />
@@ -118,6 +118,15 @@
           <a type="button"  name="submit" class="button--large--cta"  ng-disabled="editForm.$invalid" ng-click="Update(editPostData.$id)">Update</a>
       </form>
     </div>
+  </div>
+
+  <!-- slide menu, kept last so as to not show html link during site loadup -->
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#!/welcome">Home</a>
+    <a href="#!/account">Profile</a>
+    <a href="#!/event">Events</a>
+    <a href="#" ng-click="logout()">Logout</a>
   </div>
 </body>
 </html>
