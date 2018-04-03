@@ -11,6 +11,6 @@ angular.module('Event2Go', [
   'Event2Go.event'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
-
-  $routeProvider.otherwise({redirectTo: '/home'});
+	//default directory
+  	$routeProvider.otherwise({redirectTo: '/home'});
 }]);
