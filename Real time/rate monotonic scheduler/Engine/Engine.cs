@@ -246,6 +246,32 @@ namespace SimEngine
 
                 ListViewItem item = new ListViewItem(arr);
 
+
+                if (paramsDialog != null)
+                {
+                    paramsDialog.Invoke((MethodInvoker)delegate
+                    {
+                        paramsDialog.UpdateEventList(item);
+                    });
+                }
+            }
+        }
+        private void DisplayReadyEvent(SimEvent e)
+        {
+            // do not display timing events
+            if (e.eventType != EventType.None)
+            {
+                string[] arr = new string[6];
+                arr[0] = e.simElapsedMilliseconds.ToString();
+                arr[1] = e.processID.ToString();
+                arr[2] = e.eventParam1.ToString();
+                arr[3] = e.eventParam2.ToString();
+                arr[4] = e.eventType.ToString();
+                arr[5] = e.eventParam3.ToString();
+
+                ListViewItem item = new ListViewItem(arr);
+
+
                 if (paramsDialog != null)
                 {
                     paramsDialog.Invoke((MethodInvoker)delegate
@@ -256,7 +282,7 @@ namespace SimEngine
             }
         }
 
-        
+
     }
 
     public class Process

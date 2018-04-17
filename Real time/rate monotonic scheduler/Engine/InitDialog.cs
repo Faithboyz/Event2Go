@@ -34,7 +34,6 @@ namespace SimEngine
             OnUpdateParams(this, new ParamsEventArgs(p));
         }
 
-
         public void UpdateSimulationTime(int t)
         {
             SimulationTime.Text = t.ToString();
@@ -43,6 +42,7 @@ namespace SimEngine
         public void UpdateEventList(ListViewItem item)
         {
             EventsList.Items.Add(item);
+            Waitinglist.Items.Add(item);
         }
 
         private void EventsList_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)

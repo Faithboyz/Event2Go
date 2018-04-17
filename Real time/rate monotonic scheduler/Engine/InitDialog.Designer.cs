@@ -38,12 +38,8 @@
             this.Parameter1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Parameter2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label2 = new System.Windows.Forms.Label();
-            this.Waitinglist = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label4 = new System.Windows.Forms.Label();
+            this.listView1 = new System.Windows.Forms.ListView();
             ((System.ComponentModel.ISupportInitialize)(this.numProcesses)).BeginInit();
             this.SuspendLayout();
             // 
@@ -130,43 +126,6 @@
             this.label2.TabIndex = 8;
             this.label2.Text = "Running Processes";
             // 
-            // Waitinglist
-            // 
-            this.Waitinglist.Alignment = System.Windows.Forms.ListViewAlignment.Left;
-            this.Waitinglist.BackColor = System.Drawing.SystemColors.Control;
-            this.Waitinglist.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader4});
-            this.Waitinglist.Location = new System.Drawing.Point(379, 148);
-            this.Waitinglist.Name = "Waitinglist";
-            this.Waitinglist.OwnerDraw = true;
-            this.Waitinglist.Size = new System.Drawing.Size(361, 414);
-            this.Waitinglist.TabIndex = 9;
-            this.Waitinglist.UseCompatibleStateImageBehavior = false;
-            this.Waitinglist.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Sim-Time";
-            this.columnHeader1.Width = 90;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Process ID";
-            this.columnHeader2.Width = 92;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Priority";
-            this.columnHeader3.Width = 89;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "Period";
-            this.columnHeader4.Width = 76;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -176,14 +135,22 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "Waiting Processes";
             // 
+            // listView1
+            // 
+            this.listView1.Location = new System.Drawing.Point(397, 148);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(348, 414);
+            this.listView1.TabIndex = 11;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            // 
             // InitDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(748, 574);
             this.ControlBox = false;
+            this.Controls.Add(this.listView1);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.Waitinglist);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.EventsList);
             this.Controls.Add(this.label3);
@@ -212,11 +179,7 @@
         private System.Windows.Forms.ColumnHeader pID;
         private System.Windows.Forms.ColumnHeader Parameter2;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ListView Waitinglist;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ListView listView1;
     }
 }
