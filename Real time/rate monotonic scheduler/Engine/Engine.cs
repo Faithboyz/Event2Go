@@ -194,6 +194,7 @@ namespace SimEngine
                 e.eventParam1 = p.RunningTime;
                 e.eventParam2 = p.Period;
 				e.eventParam3 = p.NumRepeats;
+                DisplayWaitEvent(p.processID, p.StartTime, p.RunningTime, p.Period, e);
             }
             // create a null event
             else
@@ -209,8 +210,8 @@ namespace SimEngine
             DisplayEvent(e);
 
             // decrement the time remaining for all existing processes 
-			// until time remaining = 0;
-            foreach( Process process in processList)
+            // until time remaining = 0;
+            foreach ( Process process in processList)
             {
 				if (process.TimeRemaining > 0)
 				{
@@ -239,13 +240,12 @@ namespace SimEngine
                 string[] arr = new string[6];
                 arr[0] = e.simElapsedMilliseconds.ToString();
                 arr[1] = e.processID.ToString();
-                arr[2] = e.eventParam1.ToString();
-                arr[3] = e.eventParam2.ToString();
+                arr[2] = e.eventParam2.ToString();
+                arr[3] = e.eventParam1.ToString();
                 arr[4] = e.eventType.ToString();
 				arr[5] = e.eventParam3.ToString();
 
                 ListViewItem item = new ListViewItem(arr);
-
 
                 if (paramsDialog != null)
                 {
@@ -256,27 +256,24 @@ namespace SimEngine
                 }
             }
         }
-        private void DisplayReadyEvent(SimEvent e)
+        private void DisplayWaitEvent(int uniqueProcessID,int elapsedTime,int RunningTime,int Period, SimEvent e)
         {
             // do not display timing events
             if (e.eventType != EventType.None)
             {
                 string[] arr = new string[6];
-                arr[0] = e.simElapsedMilliseconds.ToString();
-                arr[1] = e.processID.ToString();
-                arr[2] = e.eventParam1.ToString();
-                arr[3] = e.eventParam2.ToString();
-                arr[4] = e.eventType.ToString();
-                arr[5] = e.eventParam3.ToString();
+                arr[0] = elapsedTime.ToString();
+                arr[1] = uniqueProcessID.ToString();
+                arr[2] = RunningTime.ToString();
+                arr[3] = Period.ToString();
 
                 ListViewItem item = new ListViewItem(arr);
-
 
                 if (paramsDialog != null)
                 {
                     paramsDialog.Invoke((MethodInvoker)delegate
                     {
-                        paramsDialog.UpdateEventList(item);
+                        paramsDialog.UpdateWaitList(item);
                     });
                 }
             }

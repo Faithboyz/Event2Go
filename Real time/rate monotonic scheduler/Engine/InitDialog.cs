@@ -42,9 +42,11 @@ namespace SimEngine
         public void UpdateEventList(ListViewItem item)
         {
             EventsList.Items.Add(item);
-            Waitinglist.Items.Add(item);
         }
-
+        public void UpdateWaitList(ListViewItem item)
+        {
+            WaitingList.Items.Add(item);
+        }
         private void EventsList_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
         {
             e.Graphics.FillRectangle(Brushes.LawnGreen, e.Bounds);
@@ -55,7 +57,17 @@ namespace SimEngine
         {
             e.DrawDefault = true;
         }
-        
+        private void WaitingList_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
+        {
+            e.Graphics.FillRectangle(Brushes.LawnGreen, e.Bounds);
+            e.DrawText();
+        }
+
+        private void WaitingList_DrawItem(object sender, DrawListViewItemEventArgs e)
+        {
+            e.DrawDefault = true;
+        }
+
     }
 
     public class Params
