@@ -189,18 +189,19 @@ namespace SimEngine
                 p.processID = uniqueProcessID;
                 DisplayWaitEvent(uniqueProcessID, p.StartTime, p.RunningTime, p.Period);
                 waitingList.Add(p);
-                waitingList = waitingList.OrderBy(o => o.Period).ToList();
+                waitingList = waitingList.OrderByDescending(o => o.Period).ToList();
 
                 if ((processList.Count < numProcesses) && (waitingList.Count != 0))
                 {
-                    e.simElapsedMilliseconds = waitingList[0].StartTime;
-                    e.processID = waitingList[0].processID;
+                    int last = waitingList.Count-1;
+                    e.simElapsedMilliseconds = waitingList[last].StartTime;
+                    e.processID = waitingList[last].processID;
                     e.eventType = EventType.CreateProcess;
-                    e.eventParam1 = waitingList[0].RunningTime;
-                    e.eventParam2 = waitingList[0].Period;
-                    e.eventParam3 = waitingList[0].NumRepeats;
-                    processList.Add(waitingList[0]);
-                    waitingList.RemoveAt(0);
+                    e.eventParam1 = waitingList[last].RunningTime;
+                    e.eventParam2 = waitingList[last].Period;
+                    e.eventParam3 = waitingList[last].NumRepeats;
+                    processList.Add(waitingList[last]);
+                    waitingList.RemoveAt(last);
                     DisplayEvent(e);
 
                 }
