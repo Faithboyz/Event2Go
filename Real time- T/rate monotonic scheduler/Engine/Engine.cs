@@ -201,6 +201,7 @@ namespace SimEngine
                     e.eventParam3 = waitingList[0].NumRepeats;
                     processList.Add(waitingList[0]);
                     waitingList.RemoveAt(0);
+                    DisplayEvent(e);
 
                 }
                 // create a null event
@@ -215,7 +216,7 @@ namespace SimEngine
                 }
             }
 
-            DisplayEvent(e);
+            
             // decrement the time remaining for all existing processes 
             // until time remaining = 0;
             foreach ( Process process in processList)
