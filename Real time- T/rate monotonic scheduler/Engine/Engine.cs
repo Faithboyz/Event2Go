@@ -176,44 +176,47 @@ namespace SimEngine
 
             // randomly create new periodic process. At no point can we end up with an infeasible schedule.
             // create a random event that occurs 10% of the time
-            if ((rnd.Next(1, 21) == 5) && (numProcesses > 0) && (waitingList.Count < waitlist))
+            if ((rnd.Next(1, 21) == 5) && (numProcesses > 0))
             {
-                // add the new process to the process list
-                Process p = new Process();
-                uniqueProcessID++;
-                p.StartTime = elapsedTime;
-                p.Period = rnd.Next(50, 200);
-                p.RunningTime = rnd.Next(5, (int)((double)p.Period / (double)rnd.Next(2, 5)));
-                p.NumRepeats = rnd.Next(2, 10);
-                p.TimeRemaining = p.RunningTime;
-                p.processID = uniqueProcessID;
-                DisplayWaitEvent(uniqueProcessID, p.StartTime, p.RunningTime, p.Period);
-                waitingList.Add(p);
-                waitingList = waitingList.OrderByDescending(o => o.Period).ToList();
-
-                if ((processList.Count < numProcesses) && (waitingList.Count != 0))
+                if ((processList.Count < numProcesses) || (waitingList.Count < waitlist))
                 {
-                    int last = waitingList.Count-1;
-                    e.simElapsedMilliseconds = waitingList[last].StartTime;
-                    e.processID = waitingList[last].processID;
-                    e.eventType = EventType.CreateProcess;
-                    e.eventParam1 = waitingList[last].RunningTime;
-                    e.eventParam2 = waitingList[last].Period;
-                    e.eventParam3 = waitingList[last].NumRepeats;
-                    processList.Add(waitingList[last]);
-                    waitingList.RemoveAt(last);
-                    DisplayEvent(e);
+                    // add the new process to the process list
+                    Process p = new Process();
+                    uniqueProcessID++;
+                    p.StartTime = elapsedTime;
+                    p.Period = rnd.Next(50, 200);
+                    p.RunningTime = rnd.Next(5, (int)((double)p.Period / (double)rnd.Next(2, 5)));
+                    p.NumRepeats = rnd.Next(2, 10);
+                    p.TimeRemaining = p.RunningTime;
+                    p.processID = uniqueProcessID;
+                    DisplayWaitEvent(uniqueProcessID, p.StartTime, p.RunningTime, p.Period);
+                    waitingList.Add(p);
+                    waitingList = waitingList.OrderByDescending(o => o.Period).ToList();
 
-                }
-                // create a null event
-                else
-                {
-                    e.simElapsedMilliseconds = elapsedTime;
-                    e.processID = 0;
-                    e.eventType = EventType.None;
-                    e.eventParam1 = 0;
-                    e.eventParam2 = 0;
-                    e.eventParam3 = 0;
+                    if ((processList.Count < numProcesses) && (waitingList.Count != 0))
+                    {
+                        int last = waitingList.Count - 1;
+                        e.simElapsedMilliseconds = waitingList[last].StartTime;
+                        e.processID = waitingList[last].processID;
+                        e.eventType = EventType.CreateProcess;
+                        e.eventParam1 = waitingList[last].RunningTime;
+                        e.eventParam2 = waitingList[last].Period;
+                        e.eventParam3 = waitingList[last].NumRepeats;
+                        processList.Add(waitingList[last]);
+                        waitingList.RemoveAt(last);
+                        DisplayEvent(e);
+
+                    }
+                    // create a null event
+                    else
+                    {
+                        e.simElapsedMilliseconds = elapsedTime;
+                        e.processID = 0;
+                        e.eventType = EventType.None;
+                        e.eventParam1 = 0;
+                        e.eventParam2 = 0;
+                        e.eventParam3 = 0;
+                    }
                 }
             }
 
