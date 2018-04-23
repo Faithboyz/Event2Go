@@ -42,7 +42,7 @@ namespace SimEngine
         public void UpdateEventList(ListViewItem item)
         {
             EventsList.Items.Add(item);
-            WaitingList.Items.Remove(item);
+            //WaitingList.Items.Remove(item);
         }
         public void UpdateWaitList(ListViewItem item)
         {

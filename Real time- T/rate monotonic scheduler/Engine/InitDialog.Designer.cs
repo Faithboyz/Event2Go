@@ -160,7 +160,7 @@
             // 
             // columnHeader1
             // 
-            this.columnHeader1.Text = "Sim-Time";
+            this.columnHeader1.Text = "Ready-Time";
             this.columnHeader1.Width = 90;
             // 
             // columnHeader2

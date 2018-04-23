@@ -172,13 +172,13 @@ namespace SimEngine
 			// the idea is to create a new repeating process at a rate of about 1 every 10 timer ticks.
 			// first create a single test event
 			SimEvent e = new SimEvent();
-            waitlist = numProcesses + 2;
+            //add one extra for the ready list
 
             // randomly create new periodic process. At no point can we end up with an infeasible schedule.
             // create a random event that occurs 10% of the time
             if ((rnd.Next(1, 21) == 5) && (numProcesses > 0))
             {
-                if ((processList.Count < numProcesses) || (waitingList.Count < waitlist))
+                if ((processList.Count < numProcesses) || (waitingList.Count < numProcesses))
                 {
                     // add the new process to the process list
                     Process p = new Process();
@@ -189,21 +189,26 @@ namespace SimEngine
                     p.NumRepeats = rnd.Next(2, 10);
                     p.TimeRemaining = p.RunningTime;
                     p.processID = uniqueProcessID;
-                    DisplayWaitEvent(uniqueProcessID, p.StartTime, p.RunningTime, p.Period);
-                    waitingList.Add(p);
-                    waitingList = waitingList.OrderByDescending(o => o.Period).ToList();
 
+                    //add the ready process to the list
+                    DisplayWaitEvent(uniqueProcessID, p.StartTime, p.RunningTime, p.Period);
+                    // add the process to the waiting list
+                    waitingList.Add(p);
+                    // sort the list based on period
+                    waitingList = waitingList.OrderBy(o => o.Period).ToList();
+
+                    //check if the process list can accept more variables
                     if ((processList.Count < numProcesses) && (waitingList.Count != 0))
                     {
-                        int last = waitingList.Count - 1;
-                        e.simElapsedMilliseconds = waitingList[last].StartTime;
-                        e.processID = waitingList[last].processID;
+                        e.simElapsedMilliseconds = elapsedTime;
+                        e.processID = waitingList[0].processID;
                         e.eventType = EventType.CreateProcess;
-                        e.eventParam1 = waitingList[last].RunningTime;
-                        e.eventParam2 = waitingList[last].Period;
-                        e.eventParam3 = waitingList[last].NumRepeats;
-                        processList.Add(waitingList[last]);
-                        waitingList.RemoveAt(last);
+                        e.eventParam1 = waitingList[0].RunningTime;
+                        e.eventParam2 = waitingList[0].Period;
+                        e.eventParam3 = waitingList[0].NumRepeats;
+                        // add the process to the main
+                        processList.Add(waitingList[0]);
+                        waitingList.RemoveAt(0);
                         DisplayEvent(e);
 
                     }
@@ -249,13 +254,13 @@ namespace SimEngine
             // do not display timing events
             if (e.eventType != EventType.None)
             {
-                string[] arr = new string[6];
+                string[] arr = new string[4];
                 arr[0] = e.simElapsedMilliseconds.ToString();
                 arr[1] = e.processID.ToString();
                 arr[2] = e.eventParam2.ToString();
                 arr[3] = e.eventParam1.ToString();
-                arr[4] = e.eventType.ToString();
-				arr[5] = e.eventParam3.ToString();
+                //arr[4] = e.eventType.ToString();
+				//arr[5] = e.eventParam3.ToString();
 
                 ListViewItem item = new ListViewItem(arr);
 
@@ -268,13 +273,14 @@ namespace SimEngine
                 }
             }
         }
-        private void DisplayWaitEvent(int uniqueProcessID,int elapsedTime,int RunningTime,int Period)
+        private void DisplayWaitEvent(int uniqueProcessID,int elapsedTime,int RunningTime, int Period)
         {
-            string[] arr = new string[6];
+            string[] arr = new string[4];
             arr[0] = elapsedTime.ToString();
             arr[1] = uniqueProcessID.ToString();
             arr[2] = Period.ToString();
             arr[3] = RunningTime.ToString();
+
 
             ListViewItem item = new ListViewItem(arr);
 
@@ -284,11 +290,8 @@ namespace SimEngine
                 {
                     paramsDialog.UpdateWaitList(item);
                 });
-            }
-            
+            }   
         }
-
-
     }
 
     public class Process
